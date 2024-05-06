@@ -8,9 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Concerns\HasUuid;
-class User extends Authenticatable
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
+use Filament\Panel;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+class User extends Authenticatable  implements FilamentUser, HasName
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuid;
+    use HasApiTokens, HasFactory, Notifiable, HasUuid, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -43,4 +48,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function getFilamentName(): string
+    {
+        return "{$this->first_name} {$this->last_name}";
+    }
+
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        // str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail()
+        return true ;
+    }
+
 }
