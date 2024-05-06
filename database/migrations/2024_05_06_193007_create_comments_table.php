@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
+            $table->string('uuid');
+            $table->text('comment');
+            $table->foreignId('post_id')->nullable()
+                ->references('id')
+                ->on('posts')
+                ->onDelete('restrict');
+
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
