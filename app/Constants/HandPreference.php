@@ -9,8 +9,8 @@ enum HandPreference: string
 {
     use AvailableAsDropdownOptions, CanBeRandomized;
 
-    case LEFT =  'left';
-    case RIGHT ='right';
+    case LEFT = 'left';
+    case RIGHT = 'right';
     case AMBIDEXTROUS = 'ambidextrous';
 
 }
