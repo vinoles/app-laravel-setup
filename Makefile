@@ -1,40 +1,40 @@
 sail := "./vendor/bin/sail"
 
-# Configuración inicial y preparación para las pruebas
+#Initial Config
 setup: up install migrate seed front-install
 
-# Construir y levantar contenedores Docker
+# Build containers
 up:
 	$(sail) up -d
 
-# Instalar dependencias de Composer
+# Composer install
 install:
 	$(sail) composer install
 
-# Ejecutar las pruebas en el contenedor
+# run test
 test:
 	$(sail) artisan test
 
 cache:
 	$(sail) artisan cache:clear
 
-# Ejecutar las pruebas en el contenedor con filtro
+# run filter test
 test_filter:
 	$(sail) artisan test --filter $(file)
 
-# Detener y eliminar contenedores Docker
+# Stop containers
 stop:
 	$(sail) down
 
-# Migraciones
+# Rund migrations
 migrate:
 	$(sail) artisan migrate
 
-# Migraciones y seed
+# Run migrations and seed
 seed:
 	$(sail) artisan db:seed
 
-# Restaurar db
+# Refresh database and migrations
 db_fresh:
 	$(sail) artisan migrate:fresh --seed --force
 
