@@ -25,34 +25,17 @@ docker run --rm \
 # Setup envs
 cp .env.example .env
 
-# Set alias sail
-alias sail="./vendor/bin/sail"
+#Build containers
+make setup
 
-# Start all containers from 'docker-compose.yml' in background
-sail up -d
+# Start all containers
+make up
 
-# Migrations
-sail artisan migrate --seed
+# Stop all containers
+make stop
 
-# Generate key
-sail artisan key:generate
-
-# Install NPM dependencies
-sail bun install
-
-# Build js and css assets
-sail bun run build
-
-# Pass tests
-sail test
-```
-
-## Dusk
-
-Dusk install
-
-```php
-sail artisan dusk:install
+# Run dev
+make front-dev
 ```
 
 ## Scout
@@ -61,4 +44,16 @@ Notes
 
 ```php
 sail artisan queue:work redis --queue=scout
+```
+
+## WEB
+
+```bash
+
+#WEB
+http://dogme-app.local:8099
+
+#Admin
+
+http://dogme-app.local:8099/admin/login
 ```
