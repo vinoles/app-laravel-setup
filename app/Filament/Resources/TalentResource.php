@@ -50,30 +50,37 @@ class TalentResource extends Resource
                     ->label(__('admin.globals.first_name'))
                     ->required()
                     ->maxLength(255),
+
                 TextInput::make('last_name')
                     ->label(__('admin.globals.last_name'))
                     ->required()
                     ->maxLength(255),
+
                 TextInput::make('phone')
                     ->label(__('admin.globals.phone'))
                     ->tel()
                     ->maxLength(50),
+
                 TextInput::make('address')
                     ->label(__('admin.globals.address'))
                     ->required()
                     ->maxLength(150),
+
                 TextInput::make('city')
                     ->label(__('admin.globals.city'))
                     ->maxLength(50),
+
                 TextInput::make('province')
                     ->label(__('admin.globals.province'))
                     ->maxLength(50),
+
                 TextInput::make('postal_code')
                     ->label(__('admin.globals.postal_code'))
                     ->maxLength(25),
+
                 Select::make('hand_preference')
                     ->label(__('admin.talents.hand_preference'))
-                    ->options(HandPreference::asAdminDropdownOptions()->values())
+                    ->options(HandPreference::asAdminDropdownOptions())
                     ->required(),
 
 
@@ -90,34 +97,44 @@ class TalentResource extends Resource
                 TextColumn::make('first_name')
                     ->label(__('admin.globals.first_name'))
                     ->searchable(),
+
                 TextColumn::make('last_name')
                     ->label(__('admin.globals.last_name'))
                     ->searchable(),
+
                 TextColumn::make('phone')
                     ->label(__('admin.globals.phone'))
                     ->searchable(),
+
                 TextColumn::make('address')
                     ->label(__('admin.globals.address'))
                     ->searchable(),
+
                 TextColumn::make('city')
                     ->label(__('admin.globals.city'))
                     ->searchable(),
+
                 TextColumn::make('hand_preference')
-                    ->label(__('admin.talents.hand_preference')),
+                    ->label(__('admin.talents.hand_preference'))
+                    ->view('tables.columns.filament.hand-preference'),
+
                 TextColumn::make('birthdate')
                     ->label(__('admin.globals.birthdate'))
                     ->date()
                     ->sortable(),
+
                 TextColumn::make('created_at')
                     ->label(__('admin.globals.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 TextColumn::make('updated_at')
                     ->label(__('admin.globals.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 TextColumn::make('deleted_at')
                     ->label(__('admin.globals.deleted_at'))
                     ->dateTime()

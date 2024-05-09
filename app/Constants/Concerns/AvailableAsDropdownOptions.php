@@ -24,12 +24,17 @@ trait AvailableAsDropdownOptions
      *
      * @return Collection
      */
-    public static function asAdminDropdownOptions(): Collection
+    public static function asAdminDropdownOptions(): array
     {
-        return collect(static::cases())->map(static fn ($option) => [
-            // $option->value => `admin.talents.{$option->value}`,
-             $option->value =>$option->value,
-        ]);
-    }
+        $elements = static::cases();
 
+        $options = [];
+
+        foreach ($elements as $element) {
+
+            $options[$element->value] = __("admin.talents.{$element->value}");
+        }
+
+        return $options;
+    }
 }

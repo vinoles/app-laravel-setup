@@ -1,12 +1,10 @@
 <?php
 
 return [
-
     'locales' => [
         'es' => 'Español',
         'en' => 'Inglés',
         'fr' => 'Francés',
-
     ],
     'globals' => [
         'first_name' => 'Primer nombre',
