@@ -10,6 +10,11 @@ class ListTalent extends ListRecords
 {
     protected static string $resource = TalentResource::class;
 
+    public function getTitle(): string
+    {
+        return __('admin.talents.talents');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

@@ -57,5 +57,11 @@ front-install:
 front-dev:
 	$(sail) bun run dev
 
+front-build:
+	$(sail) bun run build
+
 shell:
-	$(sail) sail shell
+	$(sail) shell
+
+sail:
+	$(sail) $(command)

@@ -26,19 +26,21 @@ class TalentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    protected static ?string $navigationGroup = 'Social';
+    public static function getNavigationGroup(): string {
+        return __('admin.globals.social');
+    }
 
-    protected static ?string $navigationLabel = 'Talents';
+
+    public static function getNavigationLabel(): string {
+        return __('admin.talents.talents');
+    }
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                TextInput::make('uuid')
-                    ->label('UUID')
-                    ->required()
-                    ->maxLength(255),
                 TextInput::make('first_name')
+                    ->label(__('firstName'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('last_name')
@@ -67,10 +69,8 @@ class TalentResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('uuid')
-                    ->label('UUID')
-                    ->searchable(),
                 TextColumn::make('first_name')
+                    ->label(__('admin.globals.first_name'))
                     ->searchable(),
                 TextColumn::make('last_name')
                     ->searchable(),
@@ -79,10 +79,6 @@ class TalentResource extends Resource
                 TextColumn::make('address')
                     ->searchable(),
                 TextColumn::make('city')
-                    ->searchable(),
-                TextColumn::make('province')
-                    ->searchable(),
-                TextColumn::make('postal_code')
                     ->searchable(),
                 TextColumn::make('hand_preference'),
                 TextColumn::make('birthdate')
