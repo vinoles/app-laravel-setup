@@ -13,7 +13,7 @@ return [
         'last_name' => 'Last name',
         'first_last_name' => 'First last name',
         'second_last_name' => 'Second last name',
-        'social' => 'Social'
+        'social' => 'Social',
     ],
     'talents' => [
         'talents' => 'Talents',

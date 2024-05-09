@@ -2,7 +2,12 @@
 
 namespace App\Filament\Resources;
 
+use App\Constants\HandPreference;
 use App\Filament\Resources\TalentResource\Pages;
+use App\Filament\Resources\TalentResource\Pages\CreateTalent;
+use App\Filament\Resources\TalentResource\Pages\EditTalent;
+use App\Filament\Resources\TalentResource\Pages\ListTalent;
+use App\Filament\Resources\TalentResource\Pages\ViewTalent;
 use App\Models\Talent;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
@@ -19,6 +24,7 @@ use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
 
 class TalentResource extends Resource
 {
@@ -37,30 +43,42 @@ class TalentResource extends Resource
 
     public static function form(Form $form): Form
     {
+        //dd(HandPreference::asAdminDropdownOptions()->values());
         return $form
             ->schema([
                 TextInput::make('first_name')
-                    ->label(__('firstName'))
+                    ->label(__('admin.globals.first_name'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('last_name')
+                    ->label(__('admin.globals.last_name'))
                     ->required()
                     ->maxLength(255),
                 TextInput::make('phone')
+                    ->label(__('admin.globals.phone'))
                     ->tel()
                     ->maxLength(50),
                 TextInput::make('address')
+                    ->label(__('admin.globals.address'))
                     ->required()
                     ->maxLength(150),
                 TextInput::make('city')
+                    ->label(__('admin.globals.city'))
                     ->maxLength(50),
                 TextInput::make('province')
+                    ->label(__('admin.globals.province'))
                     ->maxLength(50),
                 TextInput::make('postal_code')
+                    ->label(__('admin.globals.postal_code'))
                     ->maxLength(25),
-                TextInput::make('hand_preference')
+                Select::make('hand_preference')
+                    ->label(__('admin.talents.hand_preference'))
+                    ->options(HandPreference::asAdminDropdownOptions()->values())
                     ->required(),
+
+
                 DatePicker::make('birthdate')
+                    ->label(__('admin.globals.birthdate'))
                     ->required(),
             ]);
     }
@@ -73,26 +91,35 @@ class TalentResource extends Resource
                     ->label(__('admin.globals.first_name'))
                     ->searchable(),
                 TextColumn::make('last_name')
+                    ->label(__('admin.globals.last_name'))
                     ->searchable(),
                 TextColumn::make('phone')
+                    ->label(__('admin.globals.phone'))
                     ->searchable(),
                 TextColumn::make('address')
+                    ->label(__('admin.globals.address'))
                     ->searchable(),
                 TextColumn::make('city')
+                    ->label(__('admin.globals.city'))
                     ->searchable(),
-                TextColumn::make('hand_preference'),
+                TextColumn::make('hand_preference')
+                    ->label(__('admin.talents.hand_preference')),
                 TextColumn::make('birthdate')
+                    ->label(__('admin.globals.birthdate'))
                     ->date()
                     ->sortable(),
                 TextColumn::make('created_at')
+                    ->label(__('admin.globals.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('updated_at')
+                    ->label(__('admin.globals.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('deleted_at')
+                    ->label(__('admin.globals.deleted_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -101,8 +128,8 @@ class TalentResource extends Resource
                 TrashedFilter::make(),
             ])
             ->actions([
-               EditAction::make(),
-               ViewAction::make()
+                EditAction::make(),
+                ViewAction::make()
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -123,10 +150,10 @@ class TalentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTalent::route('/'),
-            'create' => Pages\CreateTalent::route('/create'),
-            'view' => Pages\ViewTalent::route('/{record}'),
-            'edit' => Pages\EditTalent::route('/{record}/edit'),
+            'index' => ListTalent::route('/'),
+            'create' => CreateTalent::route('/create'),
+            'view' => ViewTalent::route('/{record}'),
+            'edit' => EditTalent::route('/{record}/edit'),
         ];
     }
 

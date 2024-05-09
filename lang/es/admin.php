@@ -15,11 +15,24 @@ return [
         'last_name' => 'Apellido',
         'first_last_name' => 'Primer apellido',
         'second_last_name' => 'Segundo Apellido',
-        'social' => 'Social'
+        'social' => 'Social',
+        'phone' => 'Teléfono',
+        'address' => 'Dirección',
+        'city' => 'Ciudad',
+        'birthdate' => 'Fecha de cumpleaños',
+        'postal_code' => 'Código postal',
+        'province' => 'Provincia',
+        'created_at' => 'Creado',
+        'updated_at' => 'Modificado',
+        'deleted_at' => 'Borrado'
     ],
     'talents' => [
         'talents' => 'Talentos',
         'talent' => 'Talento',
+        'hand_preference' => 'Mano de preferencia',
+        'left' => 'Zurdo',
+        'right' => 'Derecho',
+        'ambidextrous' => 'Ambas manos'
     ],
     'users' => [
         'users' => 'Usuarios',

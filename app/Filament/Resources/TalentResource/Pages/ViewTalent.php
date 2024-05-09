@@ -10,4 +10,9 @@ class ViewTalent extends ViewRecord
 {
     protected static string $resource = TalentResource::class;
 
+    public function getTitle(): string
+    {
+        return __('admin.talents.talent');
+    }
+
 }
