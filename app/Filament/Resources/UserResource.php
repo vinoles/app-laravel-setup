@@ -19,6 +19,15 @@ class UserResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getNavigationGroup(): string {
+       return __('admin.globals.social');
+    }
+
+    public static function getNavigationLabel(): string {
+        return __('admin.users.users');
+    }
+
+
     public static function form(Form $form): Form
     {
         return $form

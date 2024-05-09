@@ -18,4 +18,23 @@ trait AvailableAsDropdownOptions
             'value' => $option->value,
         ]);
     }
+
+    /**
+     * Retrieve the options for a select field admin.
+     *
+     * @return Collection
+     */
+    public static function asAdminDropdownOptions(): array
+    {
+        $elements = static::cases();
+
+        $options = [];
+
+        foreach ($elements as $element) {
+
+            $options[$element->value] = __("admin.talents.{$element->value}");
+        }
+
+        return $options;
+    }
 }

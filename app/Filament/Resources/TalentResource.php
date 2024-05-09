@@ -2,16 +2,29 @@
 
 namespace App\Filament\Resources;
 
+use App\Constants\HandPreference;
 use App\Filament\Resources\TalentResource\Pages;
-use App\Filament\Resources\TalentResource\RelationManagers;
+use App\Filament\Resources\TalentResource\Pages\CreateTalent;
+use App\Filament\Resources\TalentResource\Pages\EditTalent;
+use App\Filament\Resources\TalentResource\Pages\ListTalent;
+use App\Filament\Resources\TalentResource\Pages\ViewTalent;
 use App\Models\Talent;
-use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ForceDeleteBulkAction;
+use Filament\Tables\Actions\RestoreBulkAction;
+use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Forms\Components\Select;
 
 class TalentResource extends Resource
 {
@@ -19,35 +32,59 @@ class TalentResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function getNavigationGroup(): string {
+        return __('admin.globals.social');
+    }
+
+
+    public static function getNavigationLabel(): string {
+        return __('admin.talents.talents');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('uuid')
-                    ->label('UUID')
+                TextInput::make('first_name')
+                    ->label(__('admin.globals.first_name'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('first_name')
+
+                TextInput::make('last_name')
+                    ->label(__('admin.globals.last_name'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('last_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
+
+                TextInput::make('phone')
+                    ->label(__('admin.globals.phone'))
                     ->tel()
                     ->maxLength(50),
-                Forms\Components\TextInput::make('address')
+
+                TextInput::make('address')
+                    ->label(__('admin.globals.address'))
                     ->required()
                     ->maxLength(150),
-                Forms\Components\TextInput::make('city')
+
+                TextInput::make('city')
+                    ->label(__('admin.globals.city'))
                     ->maxLength(50),
-                Forms\Components\TextInput::make('province')
+
+                TextInput::make('province')
+                    ->label(__('admin.globals.province'))
                     ->maxLength(50),
-                Forms\Components\TextInput::make('postal_code')
+
+                TextInput::make('postal_code')
+                    ->label(__('admin.globals.postal_code'))
                     ->maxLength(25),
-                Forms\Components\TextInput::make('hand_preference')
+
+                Select::make('hand_preference')
+                    ->label(__('admin.talents.hand_preference'))
+                    ->options(HandPreference::asAdminDropdownOptions())
                     ->required(),
-                Forms\Components\DatePicker::make('birthdate')
+
+
+                DatePicker::make('birthdate')
+                    ->label(__('admin.globals.birthdate'))
                     ->required(),
             ]);
     }
@@ -56,51 +93,65 @@ class TalentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('uuid')
-                    ->label('UUID')
+                TextColumn::make('first_name')
+                    ->label(__('admin.globals.first_name'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('first_name')
+
+                TextColumn::make('last_name')
+                    ->label(__('admin.globals.last_name'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('last_name')
+
+                TextColumn::make('phone')
+                    ->label(__('admin.globals.phone'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
+
+                TextColumn::make('address')
+                    ->label(__('admin.globals.address'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('address')
+
+                TextColumn::make('city')
+                    ->label(__('admin.globals.city'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('city')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('province')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('postal_code')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('hand_preference'),
-                Tables\Columns\TextColumn::make('birthdate')
+
+                TextColumn::make('hand_preference')
+                    ->label(__('admin.talents.hand_preference'))
+                    ->view('tables.columns.filament.hand-preference'),
+
+                TextColumn::make('birthdate')
+                    ->label(__('admin.globals.birthdate'))
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
+
+                TextColumn::make('created_at')
+                    ->label(__('admin.globals.created_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+
+                TextColumn::make('updated_at')
+                    ->label(__('admin.globals.updated_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
+
+                TextColumn::make('deleted_at')
+                    ->label(__('admin.globals.deleted_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make(),
+                ViewAction::make()
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                    ForceDeleteBulkAction::make(),
+                    RestoreBulkAction::make(),
                 ]),
             ]);
     }
@@ -115,9 +166,10 @@ class TalentResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTalent::route('/'),
-            'create' => Pages\CreateTalent::route('/create'),
-            'edit' => Pages\EditTalent::route('/{record}/edit'),
+            'index' => ListTalent::route('/'),
+            'create' => CreateTalent::route('/create'),
+            'view' => ViewTalent::route('/{record}'),
+            'edit' => EditTalent::route('/{record}/edit'),
         ];
     }
 

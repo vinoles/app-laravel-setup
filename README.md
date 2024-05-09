@@ -57,3 +57,14 @@ http://dogme-app.local:8099
 
 http://dogme-app.local:8099/admin/login
 ```
+
+## Command install o artisan command
+
+```bash
+
+#Example install package
+make sail command="composer require bezhansalleh/filament-language-switch"
+
+#Example command artisan
+make sail command="artisan tinker"
+```
