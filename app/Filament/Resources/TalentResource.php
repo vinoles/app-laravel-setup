@@ -43,7 +43,6 @@ class TalentResource extends Resource
 
     public static function form(Form $form): Form
     {
-        //dd(HandPreference::asAdminDropdownOptions()->values());
         return $form
             ->schema([
                 TextInput::make('first_name')
