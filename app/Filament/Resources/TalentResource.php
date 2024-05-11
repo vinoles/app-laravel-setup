@@ -8,6 +8,7 @@ use App\Filament\Resources\TalentResource\Pages\CreateTalent;
 use App\Filament\Resources\TalentResource\Pages\EditTalent;
 use App\Filament\Resources\TalentResource\Pages\ListTalent;
 use App\Filament\Resources\TalentResource\Pages\ViewTalent;
+use App\Filament\Resources\TalentResource\RelationManagers\PostsRelationManager;
 use App\Models\Talent;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TextInput;
@@ -25,6 +26,7 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Forms\Components\Select;
+use Filament\Tables\Filters\SelectFilter;
 
 class TalentResource extends Resource
 {
@@ -142,6 +144,9 @@ class TalentResource extends Resource
             ])
             ->filters([
                 TrashedFilter::make(),
+                SelectFilter::make('hand_preference')
+                    ->label(__('admin.talents.hand_preference'))
+                    ->options(HandPreference::asAdminDropdownOptions())
             ])
             ->actions([
                 EditAction::make(),
@@ -159,7 +164,8 @@ class TalentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            PostsRelationManager::class
+
         ];
     }
 
