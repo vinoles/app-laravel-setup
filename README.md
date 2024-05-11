@@ -32,7 +32,8 @@ make setup
 make up
 
 # Stop all containers
-make stop
+# Se Eliminan
+# make stop
 
 # Run dev
 make front-dev
