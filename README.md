@@ -32,18 +32,11 @@ make setup
 make up
 
 # Stop all containers
-make stop
+# Se Eliminan
+# make stop
 
 # Run dev
 make front-dev
-```
-
-## Scout
-
-Notes
-
-```php
-sail artisan queue:work redis --queue=scout
 ```
 
 ## WEB
@@ -67,4 +60,10 @@ make sail command="composer require bezhansalleh/filament-language-switch"
 
 #Example command artisan
 make sail command="artisan tinker"
+
+#run scout jobs
+make sail command="artisan queue:work redis --queue=scout"
+
+#generate key
+make sail command="artisan artisan key:generate"
 ```
