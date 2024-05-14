@@ -7,7 +7,6 @@ use LaravelJsonApi\Laravel\Http\Controllers\Actions;
 
 class TalentController extends Controller
 {
-
     use Actions\FetchMany;
     use Actions\FetchOne;
     use Actions\Store;
@@ -18,5 +17,4 @@ class TalentController extends Controller
     use Actions\UpdateRelationship;
     use Actions\AttachRelationship;
     use Actions\DetachRelationship;
-
 }
