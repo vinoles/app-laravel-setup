@@ -3,17 +3,20 @@
 namespace App\Models;
 
 use App\Constants\HandPreference;
+use App\Models\Concerns\HasUuid;
+use App\Observers\TalentObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+#[ObservedBy([TalentObserver::class])]
 class Talent extends Model
 {
     use HasFactory, HasUuid, SoftDeletes;
 
-   protected $table  = 'talents';
+    protected $table = 'talents';
 
     /**
      * The attributes that are mass assignable.
@@ -32,16 +35,15 @@ class Talent extends Model
         'birthdate',
     ];
 
-        /**
+    /**
      * The attributes that should be cast.
      *
      * @var array<string, string>
      */
     protected $casts = [
-        'birthdate' => 'date',
+        'birthdate' => 'date:d-m-Y',
         'hand_preference' => HandPreference::class,
     ];
-
 
     /**
      * Check if talent  is active
@@ -60,7 +62,7 @@ class Talent extends Model
      */
     public function isLeftHanded(): bool
     {
-        return $this->status ===  HandPreference::LEFT;
+        return $this->status === HandPreference::LEFT;
     }
 
     /**
@@ -70,7 +72,7 @@ class Talent extends Model
      */
     public function isAmbidextrousHanded(): bool
     {
-        return $this->status ===  HandPreference::AMBIDEXTROUS;
+        return $this->status === HandPreference::AMBIDEXTROUS;
     }
 
     /**
