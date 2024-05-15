@@ -17,12 +17,10 @@ use LaravelJsonApi\Laravel\Routing\ResourceRegistrar;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(static function () {
+    JsonApiRoute::server('v1')
+        ->prefix('v1')
+        ->resources(function (ResourceRegistrar $server) {
+            $server->resource('talents', TalentController::class);
+        });
 });
-
-JsonApiRoute::server('v1')
-    ->prefix('v1')
-    ->resources(function (ResourceRegistrar $server) {
-        $server->resource('talents', TalentController::class);
-    });
