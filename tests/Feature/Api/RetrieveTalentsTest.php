@@ -35,29 +35,35 @@ class RetrieveTalentsTest extends TestCase
             ->assertUnauthorized();
     }
 
-    // /**
-    //  * A user with the required permissions can retrieve the list of talents.
-    //  *
-    //  * @test
-    //  * @return void
-    //  */
-    // public function can_retrieve_talents(): void
-    // {
-    //     $this->signIn(null);
+    /**
+     * A user logged in can retrieve the talents
+     *
+     * @test
+     * @return void
+     */
+    public function can_retrieve_talents_if_is_logged_in(): void
+    {
+        $talents = Talent::factory()->count(3)->create();
 
-    //     $account = $this->user->getTalent();
+        $request = RetrieveTalentsRequest::make();
 
-    //     $talents = Talent::factory()
-    //         ->randomAmount()
-    //         ->for($account)
-    //         ->withPrices()
-    //         ->create();
+        $user = User::factory()->create();
 
-    //     $response = $this->sendRequest($account);
+        $response = $this->signIn($user)
+            ->sendRequestApiGet($request);
 
-    //     $response->assertSuccessful();
+        $response->assertSuccessful();
 
-    //     $this->assertCount($talents->count(), $response->json('data'));
-    // }
+        $this->assertEquals(count($response->json('data')), count($talents));
+
+        foreach ($talents as $talent) {
+
+            $this->assertDatabaseHas('talents', [
+                'id' => $talent->id,
+                'first_name' => $talent->first_name,
+                'last_name' => $talent->last_name,
+            ]);
+        }
+    }
 
 }
