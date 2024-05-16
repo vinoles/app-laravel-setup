@@ -74,7 +74,6 @@ trait SendsRequests
             ->query($request->getQuery())
             ->filter($request->getFilters())
             ->get($request->endpoint());
-      //  ->withData($request->payload());
     }
 
 

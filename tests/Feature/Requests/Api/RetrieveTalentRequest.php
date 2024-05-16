@@ -28,7 +28,7 @@ class RetrieveTalentRequest extends GetRequest
      */
     public function endpoint(): string
     {
-        return route('api.talents.show',['talent' => $this->talent]);
+        return route('api.talents.show', ['talent' => $this->talent]);
     }
 
 }
