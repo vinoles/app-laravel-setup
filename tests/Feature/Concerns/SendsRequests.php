@@ -59,26 +59,36 @@ trait SendsRequests
         );
     }
 
-        /**
+    /**
      * Send a request to the server.
      *
      * @param  mixed  $args
      * @return \Illuminate\Testing\TestResponse
      */
-    protected function sendRequestApiGet(...$args): TestResponse
+    protected function sendRequestApiGetList(...$args): TestResponse
     {
         $request = Arr::get($args, 0);
 
-        //TODO VERIFICAR HEADERS
-        // ->withHeaders([
-        //     'Content-Type' => 'application/vnd.api+json',
-        //     'Accept' => 'application/vnd.api+json',
-        //     'Accept' => '*/*'
-        // ])
+        return $this->jsonApi()
+            ->expects($request->expects())
+            ->query($request->getQuery())
+            ->filter($request->getFilters())
+            ->get($request->endpoint());
+      //  ->withData($request->payload());
+    }
+
+
+    /**
+     * Send a request to the server.
+     *
+     * @param  mixed  $args
+     * @return \Illuminate\Testing\TestResponse
+     */
+    protected function sendRequestApiGetShow(...$args): TestResponse
+    {
+        $request = Arr::get($args, 0);
 
         return $this->jsonApi()
-        ->expects($request->expects())
-        ->get($request->endpoint());
-      //  ->withData($request->payload());
+            ->get($request->endpoint());
     }
 }
