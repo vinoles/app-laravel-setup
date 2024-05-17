@@ -43,4 +43,18 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+
+    /**
+     * Indicates that the user has a password.
+     *
+     * @param  string  $password
+     * @return static
+     */
+    public function withPassword(string $password = 'password'): static
+    {
+        return $this->state([
+            'password' => Hash::make($password),
+        ]);
+    }
 }
