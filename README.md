@@ -22,7 +22,6 @@ docker run --rm \
     laravelsail/php83-composer:latest \
     composer install --ignore-platform-reqs
 
-
 # Setup envs
 cp .env.example .env
 
