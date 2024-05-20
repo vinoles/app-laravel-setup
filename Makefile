@@ -38,6 +38,9 @@ seed:
 db_fresh:
 	$(sail) artisan migrate:fresh --seed --force
 
+db_fresh_test:
+	$(sail) artisan migrate:fresh --force --database=pgsql_test
+
 rollback:
 	$(sail) artisan migrate:rollback
 
