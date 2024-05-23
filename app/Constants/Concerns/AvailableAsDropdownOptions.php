@@ -37,4 +37,18 @@ trait AvailableAsDropdownOptions
 
         return $options;
     }
+
+
+    /**
+     * Retrieve the options for a select field.
+     *
+     * @return array
+     */
+    public static function asValues(): array
+    {
+        return collect(static::cases())->map(static fn ($option) =>
+            $option->value,
+        )->toArray();
+    }
 }
+
