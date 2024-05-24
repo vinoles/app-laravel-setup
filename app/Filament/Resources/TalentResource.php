@@ -32,7 +32,7 @@ class TalentResource extends Resource
 {
     protected static ?string $model = Talent::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'icon-talents';
 
     public static function getNavigationGroup(): string {
         return __('admin.globals.social');

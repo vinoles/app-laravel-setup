@@ -7,6 +7,7 @@ return [
         'fr' => 'Francés',
     ],
     'globals' => [
+        'email' => 'Email',
         'first_name' => 'Primer nombre',
         'second_name' => 'Segundo nombre',
         'full_name' => 'Nombre completo',
@@ -17,9 +18,11 @@ return [
         'phone' => 'Teléfono',
         'address' => 'Dirección',
         'city' => 'Ciudad',
+        'country' => 'País',
         'birthdate' => 'Fecha de cumpleaños',
         'postal_code' => 'Código postal',
         'province' => 'Provincia',
+        'password' => 'Contraseña',
         'created_at' => 'Creado',
         'updated_at' => 'Modificado',
         'deleted_at' => 'Borrado'
