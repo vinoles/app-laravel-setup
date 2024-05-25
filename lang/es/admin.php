@@ -25,19 +25,32 @@ return [
         'password' => 'Contraseña',
         'created_at' => 'Creado',
         'updated_at' => 'Modificado',
-        'deleted_at' => 'Borrado'
+        'deleted_at' => 'Borrado',
     ],
     'talents' => [
         'talents' => 'Talentos',
         'talent' => 'Talento',
         'hand_preference' => 'Mano de preferencia',
-        'left' => 'Zurdo',
-        'right' => 'Derecho',
-        'ambidextrous' => 'Ambas manos'
+        'hand_preferences' => [
+            'left' => 'Zurdo',
+            'right' => 'Derecho',
+            'ambidextrous' => 'Ambas manos',
+        ],
     ],
     'users' => [
         'users' => 'Usuarios',
         'user' => 'Usuario',
-    ]
+        'email_verified_at' => 'Fecha de verificación de email',
+        'role' => 'Rol',
+        'roles' => [
+            'user' => 'Ususarios',
+            'talent' => 'Telentos',
+            'scout' => 'Cazador',
+            'sports_agent' => 'Agente deportivo',
+            'sponsor' => 'Patrocinador',
+            'dogme_user' => 'dogme',
+            'admin' => 'Administrador',
+        ],
+    ],
 
 ];

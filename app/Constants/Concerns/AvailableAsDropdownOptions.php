@@ -24,20 +24,18 @@ trait AvailableAsDropdownOptions
      *
      * @return Collection
      */
-    public static function asAdminDropdownOptions(): array
+    public static function asAdminDropdownOptions($resource, $option): array
     {
         $elements = static::cases();
 
         $options = [];
 
         foreach ($elements as $element) {
-
-            $options[$element->value] = __("admin.talents.{$element->value}");
+            $options[$element->value] = __("admin.{$resource}.{$option}.{$element->value}");
         }
 
         return $options;
     }
-
 
     /**
      * Retrieve the options for a select field.
@@ -46,9 +44,9 @@ trait AvailableAsDropdownOptions
      */
     public static function asValues(): array
     {
-        return collect(static::cases())->map(static fn ($option) =>
+        return collect(static::cases())->map(
+            static fn ($option) =>
             $option->value,
         )->toArray();
     }
 }
-

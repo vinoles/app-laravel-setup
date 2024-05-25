@@ -16,7 +16,7 @@ test:
 	$(sail) artisan test
 
 cache:
-	$(sail) artisan cache:clear
+	$(sail) artisan cache:clear && $(sail) artisan config:clear && $(sail) artisan route:clear
 
 # run filter test
 test_filter:
