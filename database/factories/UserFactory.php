@@ -36,6 +36,7 @@ class UserFactory extends Factory
             'postal_code' => fake()->postcode,
             'role' => UserRole::random(),
             'email_verified_at' => now(),
+            'birthdate' => now()->subYears(random_int(11, 20)),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
@@ -46,11 +47,10 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(static fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
-
 
     /**
      * Indicates that the user has a password.
