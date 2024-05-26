@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\V1\TalentController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
 use LaravelJsonApi\Laravel\Routing\ResourceRegistrar;
@@ -21,7 +20,7 @@ Route::middleware('auth:sanctum')->group(static function () {
     JsonApiRoute::server('v1')
         ->prefix('v1')
         ->name('api.')
-        ->resources(function (ResourceRegistrar $server) {
+        ->resources(static function (ResourceRegistrar $server) {
             $server->resource('talents', TalentController::class);
         });
 });

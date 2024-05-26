@@ -32,6 +32,9 @@ class CreateNewUser implements CreatesNewUsers
 
     public function rules(): array
     {
+        $allowedBirthdate = now()
+            ->subYears(config('dogme.minimum_age'))->format('Y-m-d');
+
         return [
             'email' => [
                 'bail',
@@ -50,6 +53,7 @@ class CreateNewUser implements CreatesNewUsers
             'birthdate' => [
                 'required',
                 'date',
+                "before_or_equal:{$allowedBirthdate}",
             ],
             'role' => ['required', 'string', Rule::enum(UserRole::class)],
             'password' => $this->passwordRules(),

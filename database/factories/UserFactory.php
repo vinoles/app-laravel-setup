@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Constants\UserRole;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
@@ -36,7 +37,7 @@ class UserFactory extends Factory
             'postal_code' => fake()->postcode,
             'role' => UserRole::random(),
             'email_verified_at' => now(),
-            'birthdate' => now()->subYears(random_int(11, 20)),
+            'birthdate' => now()->subYears(random_int(14, 20)),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
@@ -62,6 +63,16 @@ class UserFactory extends Factory
     {
         return $this->state([
             'password' => Hash::make($password),
+        ]);
+    }
+
+    /**
+     * Indicate the birthdate.
+     */
+    public function withBirthdate(Carbon $birthdate): static
+    {
+        return $this->state([
+            'birthdate' => $birthdate->format('Y-m-d'),
         ]);
     }
 }

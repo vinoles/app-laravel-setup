@@ -29,7 +29,9 @@ class SignUpRequest extends PostRequest
      */
     public function endpoint(): string
     {
-        return RoutePath::for('register', '/register');
+        $prefix = config('dogme.prefix_api');
+
+        return RoutePath::for('register', "{$prefix}/register");
     }
 
     /**
@@ -41,7 +43,48 @@ class SignUpRequest extends PostRequest
     protected function fillPayload(User $user): static
     {
         $this->payload = array_filter(
-            Arr::except($user->getAttributes(), 'uuid'),
+            Arr::except(
+                $user->getAttributes(),
+                [
+                    'uuid',
+                    'updated_at',
+                    'created_at',
+                    'id',
+                ]
+            ),
+            static fn ($value) => $value !== null
+        );
+
+        $password = Str::random(mt_rand(8, 31)).'!';
+
+        $this->set('password', $password)
+            ->set('password_confirmation', $password);
+
+        return $this;
+    }
+
+    /**
+     * Fill the payload of the request based on the given user and remote attribute parameter.
+     *
+     * @param  User  $user
+     * @param  array  $attributes
+     * @return static
+     */
+    public function fillPayloadAndRemoveAttribute(User $user, array $attributes): static
+    {
+        $this->payload = array_filter(
+            Arr::except(
+                $user->getAttributes(),
+                array_merge(
+                    [
+                        'uuid',
+                        'updated_at',
+                        'created_at',
+                        'id',
+                    ],
+                    $attributes
+                )
+            ),
             static fn ($value) => $value !== null
         );
 
