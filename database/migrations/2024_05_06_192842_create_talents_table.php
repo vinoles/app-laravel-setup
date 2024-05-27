@@ -24,11 +24,7 @@ return new class extends Migration
             $table->string('postal_code', 25)->nullable();
             $table->enum(
                 'hand_preference',
-                [
-                    HandPreference::LEFT->value,
-                    HandPreference::RIGHT->value,
-                    HandPreference::AMBIDEXTROUS->value
-                ]
+                HandPreference::asValues()
             )->default(HandPreference::RIGHT);
             $table->date('birthdate');
             $table->timestamps();

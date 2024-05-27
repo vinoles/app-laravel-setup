@@ -25,7 +25,7 @@ trait SendsRequests
      * Create a new request instance.
      *
      * @param  mixed  $args
-     * @return \Tests\Feature\Requests\Request
+     * @return Request
      */
     protected function newRequest(...$args): Request
     {
@@ -42,7 +42,7 @@ trait SendsRequests
      * Send a request to the server.
      *
      * @param  mixed  $args
-     * @return \Illuminate\Testing\TestResponse
+     * @return TestResponse
      */
     protected function sendRequest(...$args): TestResponse
     {
@@ -52,7 +52,7 @@ trait SendsRequests
             $request = $this->newRequest(...$args);
         }
 
-        return  $this->json(
+        return $this->json(
             $request->method(),
             $request->endpoint(),
             $request->payload(),
@@ -63,7 +63,7 @@ trait SendsRequests
      * Send a request to the server.
      *
      * @param  mixed  $args
-     * @return \Illuminate\Testing\TestResponse
+     * @return TestResponse
      */
     protected function sendRequestApiGetList(...$args): TestResponse
     {
@@ -76,12 +76,11 @@ trait SendsRequests
             ->get($request->endpoint());
     }
 
-
     /**
      * Send a request to the server.
      *
      * @param  mixed  $args
-     * @return \Illuminate\Testing\TestResponse
+     * @return TestResponse
      */
     protected function sendRequestApiGetShow(...$args): TestResponse
     {

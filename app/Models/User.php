@@ -3,17 +3,19 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+
+use App\Constants\UserRole;
 use App\Models\Concerns\HasUuid;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable  implements FilamentUser, HasName
+class User extends Authenticatable implements FilamentUser, HasName
 {
     use HasApiTokens, HasFactory, Notifiable, HasUuid, SoftDeletes;
 
@@ -23,9 +25,17 @@ class User extends Authenticatable  implements FilamentUser, HasName
      * @var array<int, string>
      */
     protected $fillable = [
+        'email',
         'first_name',
         'last_name',
         'email',
+        'phone',
+        'address',
+        'city',
+        'country',
+        'postal_code',
+        'birthdate',
+        'role',
         'password',
     ];
 
@@ -45,8 +55,10 @@ class User extends Authenticatable  implements FilamentUser, HasName
      * @var array<string, string>
      */
     protected $casts = [
+        'birthdate' => 'date:d-m-Y',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'role' => UserRole::class,
     ];
 
     public function getFilamentName(): string
@@ -54,11 +66,10 @@ class User extends Authenticatable  implements FilamentUser, HasName
         return "{$this->first_name} {$this->last_name}";
     }
 
-
     public function canAccessPanel(Panel $panel): bool
     {
         // str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail()
-        return true ;
+        // TODO CHANGE RULE
+        return true;
     }
-
 }

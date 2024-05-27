@@ -7,6 +7,7 @@ return [
         'fr' => 'Francés',
     ],
     'globals' => [
+        'email' => 'Email',
         'first_name' => 'Primer nombre',
         'second_name' => 'Segundo nombre',
         'full_name' => 'Nombre completo',
@@ -17,24 +18,39 @@ return [
         'phone' => 'Teléfono',
         'address' => 'Dirección',
         'city' => 'Ciudad',
+        'country' => 'País',
         'birthdate' => 'Fecha de cumpleaños',
         'postal_code' => 'Código postal',
         'province' => 'Provincia',
+        'password' => 'Contraseña',
         'created_at' => 'Creado',
         'updated_at' => 'Modificado',
-        'deleted_at' => 'Borrado'
+        'deleted_at' => 'Borrado',
     ],
     'talents' => [
         'talents' => 'Talentos',
         'talent' => 'Talento',
         'hand_preference' => 'Mano de preferencia',
-        'left' => 'Zurdo',
-        'right' => 'Derecho',
-        'ambidextrous' => 'Ambas manos'
+        'hand_preferences' => [
+            'left' => 'Zurdo',
+            'right' => 'Derecho',
+            'ambidextrous' => 'Ambas manos',
+        ],
     ],
     'users' => [
         'users' => 'Usuarios',
         'user' => 'Usuario',
-    ]
+        'email_verified_at' => 'Fecha de verificación de email',
+        'role' => 'Rol',
+        'roles' => [
+            'user' => 'Ususarios',
+            'talent' => 'Telentos',
+            'scout' => 'Cazador',
+            'sports_agent' => 'Agente deportivo',
+            'sponsor' => 'Patrocinador',
+            'dogme_user' => 'dogme',
+            'admin' => 'Administrador',
+        ],
+    ],
 
 ];

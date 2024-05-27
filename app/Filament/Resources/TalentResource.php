@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Constants\HandPreference;
-use App\Filament\Resources\TalentResource\Pages;
 use App\Filament\Resources\TalentResource\Pages\CreateTalent;
 use App\Filament\Resources\TalentResource\Pages\EditTalent;
 use App\Filament\Resources\TalentResource\Pages\ListTalent;
@@ -11,6 +10,7 @@ use App\Filament\Resources\TalentResource\Pages\ViewTalent;
 use App\Filament\Resources\TalentResource\RelationManagers\PostsRelationManager;
 use App\Models\Talent;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -21,25 +21,25 @@ use Filament\Tables\Actions\ForceDeleteBulkAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Filters\SelectFilter;
 
 class TalentResource extends Resource
 {
     protected static ?string $model = Talent::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'icon-talents';
 
-    public static function getNavigationGroup(): string {
+    public static function getNavigationGroup(): string
+    {
         return __('admin.globals.social');
     }
 
-
-    public static function getNavigationLabel(): string {
+    public static function getNavigationLabel(): string
+    {
         return __('admin.talents.talents');
     }
 
@@ -81,9 +81,13 @@ class TalentResource extends Resource
 
                 Select::make('hand_preference')
                     ->label(__('admin.talents.hand_preference'))
-                    ->options(HandPreference::asAdminDropdownOptions())
+                    ->options(
+                        HandPreference::asAdminDropdownOptions(
+                            'talents',
+                            'hand_preferences'
+                        )
+                    )
                     ->required(),
-
 
                 DatePicker::make('birthdate')
                     ->label(__('admin.globals.birthdate'))
@@ -122,7 +126,8 @@ class TalentResource extends Resource
                 TextColumn::make('birthdate')
                     ->label(__('admin.globals.birthdate'))
                     ->date()
-                    ->sortable(),
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
 
                 TextColumn::make('created_at')
                     ->label(__('admin.globals.created_at'))
@@ -146,11 +151,16 @@ class TalentResource extends Resource
                 TrashedFilter::make(),
                 SelectFilter::make('hand_preference')
                     ->label(__('admin.talents.hand_preference'))
-                    ->options(HandPreference::asAdminDropdownOptions())
+                    ->options(
+                        HandPreference::asAdminDropdownOptions(
+                            'talents',
+                            'hand_preferences'
+                        )
+                    ),
             ])
             ->actions([
                 EditAction::make(),
-                ViewAction::make()
+                ViewAction::make(),
             ])
             ->bulkActions([
                 BulkActionGroup::make([
@@ -164,7 +174,7 @@ class TalentResource extends Resource
     public static function getRelations(): array
     {
         return [
-            PostsRelationManager::class
+            PostsRelationManager::class,
 
         ];
     }

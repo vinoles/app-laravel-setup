@@ -17,6 +17,7 @@ return [
         'phone' => 'Phone',
         'address' => 'Address',
         'city' => 'City',
+        'country' => 'Country',
         'birthdate' => 'Birthdate',
         'postal_code' => 'Postal code',
         'province' => 'Province',

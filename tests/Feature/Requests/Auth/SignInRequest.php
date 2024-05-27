@@ -25,6 +25,8 @@ class SignInRequest extends PostRequest
      */
     public function endpoint(): string
     {
-        return RoutePath::for('login', '/login');
+        $prefix = config('dogme.prefix_api');
+
+        return RoutePath::for('login', "{$prefix}/login");
     }
 }
