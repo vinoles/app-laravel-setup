@@ -2,13 +2,22 @@
 
 namespace Tests\Feature\Api\Talent;
 
+use App\Constants\UserRole;
 use App\Models\Talent;
 use App\Models\User;
+use Illuminate\Http\Response;
 use Tests\Feature\Api\TestCase;
 use Tests\Feature\Requests\Api\RetrieveTalentRequest;
 
 class RetrieveTalentTest extends TestCase
 {
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('db:seed', ['--class' => 'ShieldSeeder']);
+
+    }
 
     /**
      * A user not logged in cannot retrieve the talent
@@ -22,27 +31,32 @@ class RetrieveTalentTest extends TestCase
 
         $this->signIn(null)
             ->sendRequestApiGetShow($request)
-            ->assertUnauthorized();
+            ->assertUnauthorized()
+            ->assertStatus(Response::HTTP_UNAUTHORIZED);
+
     }
 
     /**
-     * A user logged in can retrieve the talent
+     * A user logged in can retrieve the talent with permissions
      *
      * @test
      * @return void
      */
-    public function can_retrieve_talent_if_is_logged_in(): void
+    public function can_retrieve_talent_if_is_logged_with_permissions (): void
     {
         $talent = Talent::factory()->create();
 
         $request = RetrieveTalentRequest::make($talent);
 
-        $user = User::factory()->create();
+        $user = User::factory()->create()
+            ->assignRole(UserRole::ADMIN);
 
         $response = $this->signIn($user)
             ->sendRequestApiGetShow($request);
 
         $response->assertSuccessful();
+
+        $response->assertStatus(Response::HTTP_OK);
 
         $data = $response->json('data');
 
@@ -59,6 +73,29 @@ class RetrieveTalentTest extends TestCase
             'phone' => $talent->phone,
             'hand_preference' => $talent->hand_preference,
         ]);
+
+    }
+
+    /**
+     * A user cannot retrieve the talent without permissions
+     *
+     * @test
+     * @return void
+     */
+    public function cannot_retrieve_talent_without_permissions(): void
+    {
+        $talent = Talent::factory()->create();
+
+        $request = RetrieveTalentRequest::make($talent);
+
+        $user = User::factory()->create();
+
+        $response = $this->signIn($user)
+            ->sendRequestApiGetShow($request);
+
+        $response->assertForbidden();
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
 
     }
 
@@ -82,6 +119,8 @@ class RetrieveTalentTest extends TestCase
             ->sendRequestApiGetShow($request);
 
         $response->assertNotFound();
+
+        $response->assertStatus(Response::HTTP_NOT_FOUND);
 
         $data = $response->json('errors');
 

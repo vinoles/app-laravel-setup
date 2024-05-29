@@ -35,7 +35,6 @@ class UserFactory extends Factory
             'city' => fake()->city(),
             'country' => fake()->country(),
             'postal_code' => fake()->postcode,
-            'role' => UserRole::random(),
             'email_verified_at' => now(),
             'birthdate' => now()->subYears(random_int(14, 20)),
             'password' => static::$password ??= Hash::make('password'),
@@ -75,4 +74,5 @@ class UserFactory extends Factory
             'birthdate' => $birthdate->format('Y-m-d'),
         ]);
     }
+
 }

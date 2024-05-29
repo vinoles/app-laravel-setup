@@ -23,10 +23,6 @@ return new class extends Migration {
             $table->string('country');
             $table->string('postal_code');
             $table->date('birthdate');
-            $table->enum(
-                'role',
-                UserRole::asValues()
-            );
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

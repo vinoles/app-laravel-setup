@@ -64,11 +64,6 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(150),
 
-                Select::make('role')
-                    ->label(__('admin.users.role'))
-                    ->options(UserRole::asAdminDropdownOptions('users', 'roles'))
-                    ->required(),
-
                 TextInput::make('city')
                     ->label(__('admin.globals.city'))
                     ->maxLength(50),
@@ -105,9 +100,9 @@ class UserResource extends Resource
                     ->label(__('admin.globals.first_name'))
                     ->searchable(),
 
-                TextColumn::make('role')
-                    ->label(__('admin.users.role'))
-                    ->view('tables.columns.filament.role'),
+                // TextColumn::make('role')
+                //     ->label(__('admin.users.role'))
+                //     ->view('tables.columns.filament.role'),
 
                 TextColumn::make('phone')
                     ->label(__('admin.globals.phone'))
@@ -177,9 +172,9 @@ class UserResource extends Resource
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
-                SelectFilter::make('role')
-                    ->label(__('admin.users.role'))
-                    ->options(UserRole::asAdminDropdownOptions('users', 'roles')),
+                // SelectFilter::make('role')
+                //     ->label(__('admin.users.role'))
+                //     ->options(UserRole::asAdminDropdownOptions('users', 'roles')),
             ]);
     }
 }
