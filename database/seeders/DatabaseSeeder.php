@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $this->call(ShieldSeeder::class);
+
         User::factory(10)->create();
 
         User::factory()->create([
@@ -22,7 +24,8 @@ class DatabaseSeeder extends Seeder
             'last_name' => 'Dogme',
             'email' => 'admin@dogme.com',
             'password' =>  Hash::make('password'),
-        ]);
+            'role' => 'admin'
+        ])->assignRole('admin');
 
         $this->call(TalentSeeder::class);
     }

@@ -84,7 +84,8 @@ class UserResource extends Resource
                     ->label(__('admin.globals.password'))
                     ->password()
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->visible(fn (User $user): bool => empty($user->id)),
             ]);
     }
 
