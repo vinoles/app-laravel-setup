@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Requests\Auth;
 
+use App\Constants\UserRole;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -59,6 +60,8 @@ class SignUpRequest extends PostRequest
 
         $this->set('password', $password)
             ->set('password_confirmation', $password);
+
+        $this->set('role', UserRole::random());
 
         return $this;
     }

@@ -4,6 +4,7 @@ namespace App\Actions\Fortify;
 
 use App\Constants\UserRole;
 use App\Models\User;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
@@ -22,12 +23,14 @@ class CreateNewUser implements CreatesNewUsers
     {
         $attributes = Validator::make($input, $this->rules())->validate();
 
+        $role = Arr::pull($attributes, 'role');
+
         return User::create(
             array_merge(
                 ['uuid' => Str::uuid()],
                 $attributes
             )
-        );
+        )->assignRole($role);
     }
 
     public function rules(): array
