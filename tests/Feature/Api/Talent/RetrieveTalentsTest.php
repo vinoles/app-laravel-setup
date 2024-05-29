@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Api\Talent;
 
+use App\Constants\UserRole;
 use App\Models\Talent;
 use App\Models\User;
 use Tests\Feature\Api\TestCase;
@@ -9,6 +10,16 @@ use Tests\Feature\Requests\Api\RetrieveTalentsRequest;
 
 class RetrieveTalentsTest extends TestCase
 {
+    /**
+     * Sets up the testing environment by calling the parent setUp method and seeding the database with initial data using ShieldSeeder.
+     *
+     * This ensures that every test starts with a consistent set of data, particularly focusing on the permissions and roles setup required by the application.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('db:seed', ['--class' => 'ShieldSeeder']);
+    }
 
     /**
      * A user not logged in cannot retrieve the talents
@@ -37,7 +48,8 @@ class RetrieveTalentsTest extends TestCase
 
         $request = RetrieveTalentsRequest::make();
 
-        $user = User::factory()->create();
+        $user = User::factory()->create()
+            ->assignRole(UserRole::ADMIN);
 
         $response = $this->signIn($user)
             ->sendRequestApiGetList($request);
@@ -84,7 +96,8 @@ class RetrieveTalentsTest extends TestCase
 
         $request = RetrieveTalentsRequest::make($queryPage);
 
-        $user = User::factory()->create();
+        $user = User::factory()->create()
+            ->assignRole(UserRole::ADMIN);
 
         $response = $this->signIn($user)
             ->sendRequestApiGetList($request);
@@ -98,10 +111,9 @@ class RetrieveTalentsTest extends TestCase
         $this->assertEquals($page, $pageMetaInformation['currentPage']);
         $this->assertEquals($total, $pageMetaInformation['total']);
         $this->assertEquals($size, $pageMetaInformation['perPage']);
-        $this->assertEquals($pages , $pageMetaInformation['lastPage']);
+        $this->assertEquals($pages, $pageMetaInformation['lastPage']);
 
         $this->assertIsArray($links);
-
     }
 
 
@@ -113,7 +125,7 @@ class RetrieveTalentsTest extends TestCase
      */
     public function can_retrieve_talents_if_is_logged_in_filtered_by_first_name(): void
     {
-        $firstName = fake()->firstName(). '1' ;
+        $firstName = fake()->firstName() . '1';
 
         $talent = Talent::factory()->withFirstName($firstName)->create();
 
@@ -136,7 +148,8 @@ class RetrieveTalentsTest extends TestCase
 
         $request = RetrieveTalentsRequest::make($queryPage, $filter);
 
-        $user = User::factory()->create();
+        $user = User::factory()->create()
+            ->assignRole(UserRole::ADMIN);
 
         $response = $this->signIn($user)
             ->sendRequestApiGetList($request);
@@ -154,5 +167,4 @@ class RetrieveTalentsTest extends TestCase
 
         $this->assertIsArray($links);
     }
-
 }
