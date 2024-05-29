@@ -16,7 +16,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use BezhanSalleh\FilamentShield\Traits\HasPanelShield;
 
 class User extends Authenticatable implements FilamentUser, HasName
 {
@@ -26,7 +25,6 @@ class User extends Authenticatable implements FilamentUser, HasName
         HasUuid,
         SoftDeletes,
         HasRoles;
-        // HasPanelShield;
 
     /**
      * The attributes that are mass assignable.
