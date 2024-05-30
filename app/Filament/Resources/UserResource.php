@@ -19,6 +19,7 @@ use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Spatie\Permission\Models\Role;
 
 class UserResource extends Resource
 {
@@ -81,6 +82,17 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->visible(fn (User $user): bool => empty($user->id)),
+                Select::make('roles')
+                    ->required()
+                    ->relationship(
+                        name: 'roles',
+                        titleAttribute: 'name',
+                        modifyQueryUsing: fn (Builder $query) => $query->whereNot('name', UserRole::SUPER_ADMIN)
+                    )
+                    ->getOptionLabelFromRecordUsing(fn (Role $rol) => __("admin.users.roles.{$rol->name}"))
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
             ]);
     }
 

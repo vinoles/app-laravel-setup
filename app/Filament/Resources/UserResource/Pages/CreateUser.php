@@ -17,11 +17,4 @@ class CreateUser extends CreateRecord
         $data['birthdate'] = now();
         return $data;
     }
-
-    protected function afterCreate(): void
-    {
-        $user = $this->record;
-        $role = $user->role;
-        $user->assignRole($role->value);
-    }
 }
