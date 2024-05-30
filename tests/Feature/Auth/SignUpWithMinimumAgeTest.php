@@ -9,6 +9,12 @@ use Tests\Feature\Requests\Auth\SignUpRequest;
 
 class SignUpWithMinimumAgeTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('db:seed', ['--class' => 'ShieldSeeder']);
+    }
+
     /**
      * Can register if the age is greater than or equal to 14
      *

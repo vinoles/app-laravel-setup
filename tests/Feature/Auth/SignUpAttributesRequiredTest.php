@@ -8,6 +8,13 @@ use Tests\Feature\Requests\Auth\SignUpRequest;
 
 class SignUpAttributesRequiredTest extends TestCase
 {
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('db:seed', ['--class' => 'ShieldSeeder']);
+    }
+
     /**
      * Cannot register if the required email is missing
      *

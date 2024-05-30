@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Constants\UserRole;
 use App\Models\Concerns\HasUuid;
+use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
@@ -14,10 +15,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser, HasName
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuid, SoftDeletes;
+    use HasApiTokens,
+        HasFactory,
+        Notifiable,
+        HasUuid,
+        SoftDeletes,
+        HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -35,7 +42,6 @@ class User extends Authenticatable implements FilamentUser, HasName
         'country',
         'postal_code',
         'birthdate',
-        'role',
         'password',
     ];
 
@@ -58,7 +64,6 @@ class User extends Authenticatable implements FilamentUser, HasName
         'birthdate' => 'date:d-m-Y',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'role' => UserRole::class,
     ];
 
     public function getFilamentName(): string
@@ -70,6 +75,9 @@ class User extends Authenticatable implements FilamentUser, HasName
     {
         // str_ends_with($this->email, '@yourdomain.com') && $this->hasVerifiedEmail()
         // TODO CHANGE RULE
-        return true;
+        return $this->hasRole(Utils::getSuperAdminName()) ||
+            $this->hasRole(Utils::getPanelUserRoleName()) ||
+            $this->hasRole(UserRole::ADMIN) ||
+            $this->hasRole(UserRole::DOGME_USER);
     }
 }

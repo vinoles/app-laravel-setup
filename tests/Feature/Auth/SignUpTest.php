@@ -8,6 +8,14 @@ use Tests\Feature\Requests\Auth\SignUpRequest;
 
 class SignUpTest extends TestCase
 {
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('db:seed', ['--class' => 'ShieldSeeder']);
+
+    }
+
+
     /**
      * A user logged in can retrieve the talents
      *
