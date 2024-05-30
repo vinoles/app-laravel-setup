@@ -14,7 +14,6 @@ use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Actions\RestoreBulkAction;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -82,14 +81,19 @@ class UserResource extends Resource
                     ->required()
                     ->maxLength(255)
                     ->visible(fn (User $user): bool => empty($user->id)),
+
                 Select::make('roles')
                     ->required()
                     ->relationship(
                         name: 'roles',
                         titleAttribute: 'name',
-                        modifyQueryUsing: fn (Builder $query) => $query->whereNot('name', UserRole::SUPER_ADMIN)
+                        modifyQueryUsing:
+                            fn (Builder $query) =>
+                            $query->whereNot('name', UserRole::SUPER_ADMIN)
                     )
-                    ->getOptionLabelFromRecordUsing(fn (Role $rol) => __("admin.users.roles.{$rol->name}"))
+                    ->getOptionLabelFromRecordUsing(
+                        fn (Role $rol) => __("admin.users.roles.{$rol->name}")
+                    )
                     ->multiple()
                     ->preload()
                     ->searchable()
@@ -111,10 +115,6 @@ class UserResource extends Resource
                 TextColumn::make('email')
                     ->label(__('admin.globals.first_name'))
                     ->searchable(),
-
-                // TextColumn::make('role')
-                //     ->label(__('admin.users.role'))
-                //     ->view('tables.columns.filament.role'),
 
                 TextColumn::make('phone')
                     ->label(__('admin.globals.phone'))
@@ -183,10 +183,7 @@ class UserResource extends Resource
     {
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
-                SoftDeletingScope::class,
-                // SelectFilter::make('role')
-                //     ->label(__('admin.users.role'))
-                //     ->options(UserRole::asAdminDropdownOptions('users', 'roles')),
+                SoftDeletingScope::class
             ]);
     }
 }
