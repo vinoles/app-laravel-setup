@@ -18,9 +18,9 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ShieldSeeder::class);
 
-         User::factory(10)->create()->each(function($user){
+        User::factory(10)->create()->each(function($user){
             $user->assignRole(UserRole::random());
-         });
+        });
 
         User::factory()->create([
             'first_name' => 'Admin',
