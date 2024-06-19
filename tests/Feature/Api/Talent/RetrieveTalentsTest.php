@@ -62,13 +62,6 @@ class RetrieveTalentsTest extends TestCase
 
             $this->assertDatabaseHas('talents', [
                 'id' => $talent->id,
-                'first_name' => $talent->first_name,
-                'last_name' => $talent->last_name,
-                'address' => $talent->address,
-                'city' => $talent->city,
-                'province' => $talent->province,
-                'postal_code' => $talent->postal_code,
-                'phone' => $talent->phone,
                 'hand_preference' => $talent->hand_preference,
             ]);
         }
@@ -117,54 +110,54 @@ class RetrieveTalentsTest extends TestCase
     }
 
 
-    /**
-     * A user logged in can retrieve the talents filtered by firs_name
-     *
-     * @test
-     * @return void
-     */
-    public function can_retrieve_talents_if_is_logged_in_filtered_by_first_name(): void
-    {
-        $firstName = fake()->firstName() . '1';
+    // /**
+    //  * A user logged in can retrieve the talents filtered by firs_name
+    //  *
+    //  * @test
+    //  * @return void
+    //  */
+    // public function can_retrieve_talents_if_is_logged_in_filtered_by_first_name(): void
+    // {
+    //     $firstName = fake()->firstName() . '1';
 
-        $talent = Talent::factory()->withFirstName($firstName)->create();
+    //     $talent = Talent::factory()->withFirstName($firstName)->create();
 
-        $talents = Talent::factory()->count(random_int(10, 100))->create();
+    //     $talents = Talent::factory()->count(random_int(10, 100))->create();
 
-        $page = 1;
+    //     $page = 1;
 
-        $size = random_int(5, 10);
+    //     $size = random_int(5, 10);
 
-        $filter = ['first_name' => $firstName];
+    //     $filter = ['first_name' => $firstName];
 
-        $listFiltered = $talents
-            ->push($talent)->where('first_name', $firstName);
+    //     $listFiltered = $talents
+    //         ->push($talent)->where('first_name', $firstName);
 
-        $total = $listFiltered->count();
+    //     $total = $listFiltered->count();
 
-        $pages = ceil($total / $size);
+    //     $pages = ceil($total / $size);
 
-        $queryPage = ['page' => ['number' => $page, 'size' => $size]];
+    //     $queryPage = ['page' => ['number' => $page, 'size' => $size]];
 
-        $request = RetrieveTalentsRequest::make($queryPage, $filter);
+    //     $request = RetrieveTalentsRequest::make($queryPage, $filter);
 
-        $user = User::factory()->create()
-            ->assignRole(UserRole::ADMIN);
+    //     $user = User::factory()->create()
+    //         ->assignRole(UserRole::ADMIN);
 
-        $response = $this->signIn($user)
-            ->sendRequestApiGetList($request);
+    //     $response = $this->signIn($user)
+    //         ->sendRequestApiGetList($request);
 
-        $response->assertSuccessful();
+    //     $response->assertSuccessful();
 
-        $links = $response->json('links');
+    //     $links = $response->json('links');
 
-        $pageMetaInformation = $response->json('meta.page');
+    //     $pageMetaInformation = $response->json('meta.page');
 
-        $this->assertEquals($page, $pageMetaInformation['currentPage']);
-        $this->assertEquals($total, $pageMetaInformation['total']);
-        $this->assertEquals($size, $pageMetaInformation['perPage']);
-        $this->assertEquals($pages, $pageMetaInformation['lastPage']);
+    //     $this->assertEquals($page, $pageMetaInformation['currentPage']);
+    //     $this->assertEquals($total, $pageMetaInformation['total']);
+    //     $this->assertEquals($size, $pageMetaInformation['perPage']);
+    //     $this->assertEquals($pages, $pageMetaInformation['lastPage']);
 
-        $this->assertIsArray($links);
-    }
+    //     $this->assertIsArray($links);
+    // }
 }

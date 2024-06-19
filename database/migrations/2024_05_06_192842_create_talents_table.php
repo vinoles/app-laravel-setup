@@ -15,18 +15,11 @@ return new class extends Migration
         Schema::create('talents', function (Blueprint $table) {
             $table->id();
             $table->string('uuid');
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('phone', 50)->nullable();
-            $table->string('address', 150);
-            $table->string('city', 50)->nullable();
-            $table->string('province', 50)->nullable();
-            $table->string('postal_code', 25)->nullable();
             $table->enum(
                 'hand_preference',
                 HandPreference::asValues()
             )->default(HandPreference::RIGHT);
-            $table->date('birthdate');
+            $table->foreignId('user_id');
             $table->timestamps();
             $table->softDeletes();
         });

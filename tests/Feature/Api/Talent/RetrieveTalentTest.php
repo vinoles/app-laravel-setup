@@ -64,13 +64,6 @@ class RetrieveTalentTest extends TestCase
 
         $this->assertDatabaseHas('talents', [
             'id' => $talent->id,
-            'first_name' => $talent->first_name,
-            'last_name' => $talent->last_name,
-            'address' => $talent->address,
-            'city' => $talent->city,
-            'province' => $talent->province,
-            'postal_code' => $talent->postal_code,
-            'phone' => $talent->phone,
             'hand_preference' => $talent->hand_preference,
         ]);
 
