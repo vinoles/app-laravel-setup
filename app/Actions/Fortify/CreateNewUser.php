@@ -3,6 +3,7 @@
 namespace App\Actions\Fortify;
 
 use App\Constants\UserRole;
+use App\Jobs\CreateTalentAfterRegister;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
@@ -25,12 +26,20 @@ class CreateNewUser implements CreatesNewUsers
 
         $role = Arr::pull($attributes, 'role');
 
-        return User::create(
+        $user =  User::create(
             array_merge(
                 ['uuid' => Str::uuid()],
                 $attributes
             )
         )->assignRole($role);
+
+        if($role === UserRole::TALENT->value) {
+            CreateTalentAfterRegister::dispatch($user);
+        }
+
+        return $user;
+
+
     }
 
     public function rules(): array
@@ -50,8 +59,8 @@ class CreateNewUser implements CreatesNewUsers
             'last_name' => ['required', 'max:50'],
             'phone' => ['required', 'string', 'min:10', 'max:20'],
             'address' => ['required', 'string', 'max:150'],
-            'city' => ['required', 'string', 'max:50'],
-            'country' => ['required', 'string', 'max:50'],
+            'city' => ['required', 'string', 'max:100'],
+            'country' => ['required', 'string', 'max:100'],
             'postal_code' => ['nullable', 'string', 'max:25'],
             'birthdate' => [
                 'required',
