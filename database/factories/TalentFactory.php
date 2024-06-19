@@ -33,17 +33,4 @@ class TalentFactory extends Factory
             'hand_preference' => HandPreference::random()
         ];
     }
-
-    // /**
-    //  * Set first_name to talent
-    //  *
-    //  * @param  string  $firstName
-    //  * @return self
-    //  */
-    // public function withFirstName(string $firstName): self
-    // {
-    //     return $this->state([
-    //         'first_name' => $firstName,
-    //     ]);
-    // }
 }
