@@ -110,6 +110,7 @@ class RetrieveTalentsTest extends TestCase
     }
 
 
+    //TODO DEJARLO COMO EJEMPLO PARA FUTUROS TEST Y LUEGO BORRARLO
     // /**
     //  * A user logged in can retrieve the talents filtered by firs_name
     //  *
