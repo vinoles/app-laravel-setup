@@ -98,4 +98,18 @@ class SignUpRequest extends PostRequest
 
         return $this;
     }
+
+    /**
+     * Fill the payload of the request based on the given user.
+     *
+     * @param  UserRole  $role
+     * @return static
+     */
+    public function  setRole(UserRole $role): static
+    {
+        $this->set('role', $role);
+
+        return $this;
+    }
+
 }

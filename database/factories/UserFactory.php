@@ -36,7 +36,7 @@ class UserFactory extends Factory
             'country' => fake()->country(),
             'postal_code' => fake()->postcode,
             'email_verified_at' => now(),
-            'birthdate' => now()->subYears(random_int(14, 20)),
+            'birthdate' => now()->subYears(random_int(15, 20)),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
