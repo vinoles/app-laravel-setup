@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Comment;
+use App\Models\Gallery;
+use App\Models\GalleryFile;
 use App\Models\Post;
 use App\Models\Talent;
 use Illuminate\Database\Seeder;
@@ -25,20 +27,32 @@ class TalentSeeder extends Seeder
         $progressBar->start();
 
         $talents = Talent::factory()
-            ->count($limit )
+            ->count($limit)
             ->create();
 
-        $talents->each(function($talent) use($progressBar) {
+        $talents->each(static function ($talent) use ($progressBar) {
             $posts = Post::factory()
                 ->forTalent($talent)
-                ->count(random_int(1,5))
+                ->count(random_int(1, 5))
                 ->create();
 
-            $posts->each(function($post) {
+            $posts->each(static function ($post) {
                 Comment::factory()
-                    ->count(random_int(1,5))
+                    ->count(random_int(1, 5))
                     ->forPost($post)
                     ->create();
+
+                $galleries = Gallery::factory()
+                    ->count(random_int(1, 5))
+                    ->forPost($post)
+                    ->create();
+
+                $galleries->each(static function ($gallery) {
+                    GalleryFile::factory()
+                        ->count(random_int(1, 5))
+                        ->forGallery($gallery)
+                        ->create();
+                });
             });
             $progressBar->advance();
         });

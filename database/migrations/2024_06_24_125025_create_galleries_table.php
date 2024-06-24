@@ -10,16 +10,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('posts', static function (Blueprint $table) {
+        Schema::create('galleries', static function (Blueprint $table) {
             $table->id();
-            $table->string('uuid');
+            $table->uuid();
             $table->string('title');
-            $table->json('content');
-            $table->boolean('is_public');
-            $table->integer('postable_id');
-            $table->string('postable_type');
+            $table->text('note');
+            $table->integer('gallerable_id');
+            $table->string('gallerable_type');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -28,6 +26,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('galleries');
     }
 };
