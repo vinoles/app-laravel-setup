@@ -46,7 +46,7 @@ class PostFactory extends Factory
     public function public(Talent $talent)
     {
         return $this->state([
-            'is_public' => false,
+            'is_public' => true,
         ]);
     }
 
