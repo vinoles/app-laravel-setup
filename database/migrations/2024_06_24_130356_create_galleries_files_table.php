@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('galleries_files', static function (Blueprint $table) {
             $table->id();
             $table->uuid();
-            $table->string('note')->nullable();
+            $table->string('name')->nullable();
             $table->string('path');
             $table->foreignId('gallery_id')->nullable()
                 ->references('id')

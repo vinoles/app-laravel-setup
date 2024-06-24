@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(ShieldSeeder::class);
 
-        User::factory(10)->create()->each(function($user){
+        User::factory(10)->create()->each(static function ($user) {
             $user->assignRole(UserRole::random());
         });
 
@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'first_name' => 'Admin',
             'last_name' => 'Dogme',
             'email' => 'admin@dogme.com',
-            'password' =>  Hash::make('password'),
+            'password' => Hash::make('password'),
         ])->assignRole(UserRole::ADMIN);
 
         $this->call(TalentSeeder::class);

@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('galleries', static function (Blueprint $table) {
             $table->id();
+            $table->uuid();
             $table->string('title');
             $table->text('note');
             $table->integer('gallerable_id');

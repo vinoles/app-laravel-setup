@@ -12,6 +12,8 @@ class GalleryFile extends Model
 {
     use HasFactory, HasUuid;
 
+    protected $table = 'galleries_files';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,8 +21,17 @@ class GalleryFile extends Model
      */
     protected $fillable = [
         'note',
-        'locale',
+        'path',
         'gallery_id',
+    ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'gallery_id' => 'integer',
     ];
 
     /**
