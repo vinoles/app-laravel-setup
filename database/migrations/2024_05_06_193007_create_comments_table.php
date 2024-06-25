@@ -19,7 +19,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('posts')
                 ->onDelete('restrict');
-
+            $table->foreignId('parent_id')->nullable()->constrained('comments');
             $table->timestamps();
             $table->softDeletes();
         });

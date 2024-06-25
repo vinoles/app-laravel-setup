@@ -2,55 +2,101 @@
 
 namespace App\Filament\Resources;
 
+use App\Constants\UserRole;
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
-use Filament\Forms;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\RestoreBulkAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Spatie\Permission\Models\Role;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'icon-users';
 
-    public static function getNavigationGroup(): string {
-       return __('admin.globals.social');
+    public static function getNavigationGroup(): string
+    {
+        return __('admin.globals.social');
     }
 
-    public static function getNavigationLabel(): string {
+    public static function getNavigationLabel(): string
+    {
         return __('admin.users.users');
     }
-
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('uuid')
-                    ->label('UUID')
+                TextInput::make('first_name')
+                    ->label(__('admin.globals.first_name'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('first_name')
+                TextInput::make('last_name')
+                    ->label(__('admin.globals.last_name'))
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('last_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
+                TextInput::make('email')
+                    ->label(__('admin.globals.email'))
                     ->email()
                     ->required()
                     ->maxLength(255),
-                Forms\Components\DateTimePicker::make('email_verified_at'),
-                Forms\Components\TextInput::make('password')
+
+                TextInput::make('phone')
+                    ->label(__('admin.globals.phone'))
+                    ->tel()
+                    ->maxLength(50),
+
+                TextInput::make('address')
+                    ->label(__('admin.globals.address'))
+                    ->required()
+                    ->maxLength(150),
+
+                TextInput::make('city')
+                    ->label(__('admin.globals.city'))
+                    ->maxLength(50),
+
+                TextInput::make('country')
+                    ->label(__('admin.globals.country'))
+                    ->maxLength(50),
+
+                TextInput::make('postal_code')
+                    ->label(__('admin.globals.postal_code')),
+
+                TextInput::make('password')
+                    ->label(__('admin.globals.password'))
                     ->password()
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->visible(fn (User $user): bool => empty($user->id)),
+
+                Select::make('roles')
+                    ->required()
+                    ->relationship(
+                        name: 'roles',
+                        titleAttribute: 'name',
+                        modifyQueryUsing:
+                            fn (Builder $query) =>
+                            $query->whereNot('name', UserRole::SUPER_ADMIN)
+                    )
+                    ->getOptionLabelFromRecordUsing(
+                        fn (Role $rol) => __("admin.users.roles.{$rol->name}")
+                    )
+                    ->multiple()
+                    ->preload()
+                    ->searchable()
             ]);
     }
 
@@ -58,42 +104,61 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('uuid')
-                    ->label('UUID')
+                TextColumn::make('first_name')
+                    ->label(__('admin.globals.first_name'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('first_name')
+
+                TextColumn::make('last_name')
+                    ->label(__('admin.globals.last_name'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('last_name')
+
+                TextColumn::make('email')
+                    ->label(__('admin.globals.first_name'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email')
+
+                TextColumn::make('phone')
+                    ->label(__('admin.globals.phone'))
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
+
+                TextColumn::make('address')
+                    ->label(__('admin.globals.address'))
+                    ->searchable(),
+
+                TextColumn::make('city')
+                    ->label(__('admin.globals.city'))
+                    ->searchable(),
+
+                TextColumn::make('email_verified_at')
+                    ->label(__('admin.users.email_verified_at'))
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
+
+                TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
+
+                TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+
+                TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make(),
+                TrashedFilter::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                    Tables\Actions\ForceDeleteBulkAction::make(),
-                    Tables\Actions\RestoreBulkAction::make(),
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                    RestoreBulkAction::make(),
                 ]),
             ]);
     }
@@ -118,7 +183,7 @@ class UserResource extends Resource
     {
         return parent::getEloquentQuery()
             ->withoutGlobalScopes([
-                SoftDeletingScope::class,
+                SoftDeletingScope::class
             ]);
     }
 }

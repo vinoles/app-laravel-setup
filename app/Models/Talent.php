@@ -8,6 +8,7 @@ use App\Observers\TalentObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -24,15 +25,8 @@ class Talent extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
-        'email',
-        'phone',
-        'address',
-        'city',
-        'postal_code',
         'hand_preference',
-        'birthdate',
+        'user_id'
     ];
 
     /**
@@ -41,8 +35,8 @@ class Talent extends Model
      * @var array<string, string>
      */
     protected $casts = [
-        'birthdate' => 'date:d-m-Y',
         'hand_preference' => HandPreference::class,
+        'user_id' => 'integer'
     ];
 
     /**
@@ -83,5 +77,13 @@ class Talent extends Model
     public function posts(): MorphMany
     {
         return $this->morphMany(Post::class, 'postable');
+    }
+
+    /**
+     * Get the user that owns the phone.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 }

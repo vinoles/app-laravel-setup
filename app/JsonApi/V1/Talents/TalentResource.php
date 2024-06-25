@@ -21,14 +21,6 @@ class TalentResource extends JsonApiResource
     {
         return [
             'id' => $this->uuid,
-            'first_name' => $this->first_name,
-            'last_name' => $this->last_name,
-            'phone' => $this->phone,
-            'address' => $this->address,
-            'city' => $this->city,
-            'province' => $this->province,
-            'talental_code' => $this->talental_code,
-            'birthdate' => $this->birthdate,
             'hand_preference' => $this->hand_preference,
         ];
     }
@@ -74,6 +66,7 @@ class TalentResource extends JsonApiResource
     public function relationships($request): iterable
     {
         return [
+            $this->relation('user'),
             $this->relation('posts'),
         ];
     }
