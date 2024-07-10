@@ -12,7 +12,6 @@ class Login extends Page
      */
     public function url(): string
     {
-        dump(route('filament.admin.auth.login'));
         return route('filament.admin.auth.login');
 
     }
