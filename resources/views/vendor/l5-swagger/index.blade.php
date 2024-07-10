@@ -45,7 +45,7 @@
 
             requestInterceptor: function(request) {
                 request.headers['X-CSRF-TOKEN'] = '{{ csrf_token() }}';
-                request.headers['accept'] = 'application/vnd.api+json';
+                request.headers['accept'] = "{{env('L5_SWAGGER_CONST_ACCEPT_HEADER')}}";
                 return request;
             },
 
