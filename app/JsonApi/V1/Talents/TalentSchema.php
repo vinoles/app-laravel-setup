@@ -86,6 +86,6 @@ class TalentSchema extends Schema
      */
     public function authorizable(): bool
     {
-        return false;
+        return true;
     }
 }
