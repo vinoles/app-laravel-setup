@@ -300,34 +300,5 @@ return [
         'constants' => [
             'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
         ],
-        // /*
-        //  * Headers configuration
-        //  */
-        // 'headers'   => [
-
-        //     'accept'       => 'application/vnd.api+json',
-
-        //     /*
-        //     |--------------------------------------------------------------------------
-        //     | Uncomment to add response headers when swagger is generated
-        //     |--------------------------------------------------------------------------
-        //     */
-
-        //     //'view' => [
-        //     //  'Content-Type' => 'text/plain',
-        //     //],
-
-        //     /*
-        //     |--------------------------------------------------------------------------
-        //     | Uncomment to add request headers when swagger performs requests
-        //     |--------------------------------------------------------------------------
-        //     */
-
-        //     'request' => [
-        //         'Content-Type' => 'application/vnd.api+json',
-        //         'Accept'       => 'application/vnd.api+json',
-        //     ],
-
-        // ],
     ],
 ];
