@@ -5,7 +5,6 @@ namespace App\ApiDoc\Talents;
 use App\ApiDoc\ApiDoc;
 use OpenApi\Annotations as OA;
 
-//page[number]=1&page[size]=4&filter[last_name]=Nolan&filter[first_name]=Jettie
 
 /**
  *
