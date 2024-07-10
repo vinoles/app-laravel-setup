@@ -24,7 +24,6 @@ class TestCase extends BaseTestCase
             Sanctum::actingAs($this->user, $scopes);
         }
 
-
         return $this;
     }
 }
