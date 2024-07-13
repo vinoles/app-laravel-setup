@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Constants\HandPreference;
-use App\Filament\Resources\TalentResource\Pages\CreateTalent;
 use App\Filament\Resources\TalentResource\Pages\EditTalent;
 use App\Filament\Resources\TalentResource\Pages\ListTalent;
 use App\Filament\Resources\TalentResource\Pages\ViewTalent;
@@ -109,7 +108,6 @@ class TalentResource extends Resource
     {
         return [
             PostsRelationManager::class,
-
         ];
     }
 
@@ -135,7 +133,7 @@ class TalentResource extends Resource
 
     public static function getLabel(): string
     {
-         return __('admin.talents.talent');
+        return __('admin.talents.talent');
     }
 
 
@@ -143,7 +141,6 @@ class TalentResource extends Resource
     {
         return [
             'index' => ListTalent::route('/'),
-            'create' => CreateTalent::route('/create'),
             'view' => ViewTalent::route('/{record}'),
             'edit' => EditTalent::route('/{record}/edit'),
         ];
