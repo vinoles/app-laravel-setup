@@ -36,6 +36,21 @@ class UserResource extends Resource
         return __('admin.users.users');
     }
 
+    public static function getSlug(): string
+    {
+        return 'users';
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('admin.users.users');
+    }
+
+    public static function getLabel(): string
+    {
+        return __('admin.users.user');
+    }
+
     public static function form(Form $form): Form
     {
         return $form

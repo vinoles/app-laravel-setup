@@ -24,7 +24,8 @@ docker run --rm \
 
 # Setup envs
 cp .env.example .env
-
+cp .env.example .env.testing
+cp .env.example .env.dusk.local
 #Build containers
 make setup
 
