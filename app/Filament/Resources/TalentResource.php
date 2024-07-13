@@ -3,7 +3,6 @@
 namespace App\Filament\Resources;
 
 use App\Constants\HandPreference;
-use App\Filament\Resources\TalentResource\Pages\CreateTalent;
 use App\Filament\Resources\TalentResource\Pages\EditTalent;
 use App\Filament\Resources\TalentResource\Pages\ListTalent;
 use App\Filament\Resources\TalentResource\Pages\ViewTalent;
@@ -31,16 +30,6 @@ class TalentResource extends Resource
     protected static ?string $model = Talent::class;
 
     protected static ?string $navigationIcon = 'icon-talents';
-
-    public static function getNavigationGroup(): string
-    {
-        return __('admin.globals.social');
-    }
-
-    public static function getNavigationLabel(): string
-    {
-        return __('admin.talents.talents');
-    }
 
     public static function form(Form $form): Form
     {
@@ -119,15 +108,38 @@ class TalentResource extends Resource
     {
         return [
             PostsRelationManager::class,
-
         ];
+    }
+
+    public static function getNavigationGroup(): string
+    {
+        return __('admin.globals.social');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.talents.talents');
+    }
+
+    public static function getSlug(): string
+    {
+        return 'talents';
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('admin.talents.talents');
+    }
+
+    public static function getLabel(): string
+    {
+        return __('admin.talents.talent');
     }
 
     public static function getPages(): array
     {
         return [
             'index' => ListTalent::route('/'),
-            'create' => CreateTalent::route('/create'),
             'view' => ViewTalent::route('/{record}'),
             'edit' => EditTalent::route('/{record}/edit'),
         ];
