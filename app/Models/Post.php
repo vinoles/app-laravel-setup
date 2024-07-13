@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\HasUuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Concerns\HasUuid;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Post extends Model
@@ -21,9 +21,41 @@ class Post extends Model
     protected $fillable = [
         'title',
         'content',
+        'is_public',
         'postable_id',
-        'postable_type'
+        'postable_type',
     ];
+
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array<string, string>
+     */
+    protected $casts = [
+        'is_public' => 'boolean',
+    ];
+
+    /**
+     * Determine if the post is public.
+     *
+     * @return bool
+     */
+    public function isPublic(): bool
+    {
+        return $this->is_public;
+    }
+
+    /**
+     * Determine if the post is public.
+     *
+     * @return bool
+     */
+    public function isPrivate(): bool
+    {
+        return ! $this->isPublic();
+    }
+
+    // Relationships methods
 
     /**
      * Get the parent postable.
@@ -43,4 +75,13 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    /**
+     * Relationship with the galleries table.
+     *
+     * @return MorphOne
+     */
+    public function gallery(): MorphOne
+    {
+        return $this->morphOne(Gallery::class, 'gallerable');
+    }
 }

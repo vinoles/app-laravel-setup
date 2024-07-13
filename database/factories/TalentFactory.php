@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Constants\HandPreference;
 use App\Models\Talent;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -28,14 +29,7 @@ class TalentFactory extends Factory
     {
         return [
             'uuid' => Str::uuid(),
-            'first_name' => fake()->firstName,
-            'last_name' => fake()->lastName,
-            'phone' => fake()->phoneNumber(),
-            'address' => fake()->streetAddress,
-            'city' => fake()->city(),
-            'province' => fake()->city(),
-            'postal_code' => fake()->postcode,
-            'birthdate' => now()->subYears(random_int(11,20)),
+            'user_id' => User::factory(),
             'hand_preference' => HandPreference::random()
         ];
     }

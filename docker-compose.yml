@@ -1,5 +1,5 @@
 services:
-    laravel.test:
+    dogme.test:
         build:
             context: ./docker/8.3
             dockerfile: Dockerfile
@@ -81,7 +81,14 @@ services:
         networks:
             - sail
     selenium:
-        image: selenium/standalone-chrome
+        image: "seleniarm/standalone-chromium"
+        ports:
+            - "${FORWARD_SELENIUM_PORT:-4444}:4444"
+        environment:
+            - START_XVFB=false
+            - SE_NODE_OVERRIDE_MAX_SESSIONS=true
+            - SE_NODE_MAX_SESSIONS=10
+            - JAVA_OPTS=-XX:ActiveProcessorCount=10
         extra_hosts:
             - "host.docker.internal:host-gateway"
         volumes:
@@ -92,6 +99,8 @@ networks:
     sail:
         driver: bridge
 volumes:
+    sail-nginx:
+        driver: local
     sail-postgres:
         driver: local
     sail-redis:

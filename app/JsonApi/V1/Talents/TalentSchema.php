@@ -40,15 +40,7 @@ class TalentSchema extends Schema
     {
         return [
             ID::make()->uuid(),
-            Str::make('first_name'),
-            Str::make('last_name'),
-            Str::make('phone'),
-            Str::make('address'),
-            Str::make('city'),
-            Str::make('province'),
-            Str::make('postal_code'),
             Str::make('hand_preference'),
-            Str::make('birthdate')->sortable(),
             DateTime::make('createdAt')->sortable()->readOnly(),
             DateTime::make('updatedAt')->sortable()->readOnly(),
         ];
@@ -63,12 +55,6 @@ class TalentSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
-            Where::make('first_name'),
-            Where::make('last_name'),
-            Where::make('phone'),
-            Where::make('addres'),
-            Where::make('city'),
-            Where::make('province'),
             Where::make('hand_preference'),
         ];
     }
@@ -100,6 +86,6 @@ class TalentSchema extends Schema
      */
     public function authorizable(): bool
     {
-        return false;
+        return true;
     }
 }
