@@ -136,7 +136,6 @@ class TalentResource extends Resource
         return __('admin.talents.talent');
     }
 
-
     public static function getPages(): array
     {
         return [
