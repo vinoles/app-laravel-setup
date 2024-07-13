@@ -32,16 +32,6 @@ class TalentResource extends Resource
 
     protected static ?string $navigationIcon = 'icon-talents';
 
-    public static function getNavigationGroup(): string
-    {
-        return __('admin.globals.social');
-    }
-
-    public static function getNavigationLabel(): string
-    {
-        return __('admin.talents.talents');
-    }
-
     public static function form(Form $form): Form
     {
         return $form
@@ -122,6 +112,32 @@ class TalentResource extends Resource
 
         ];
     }
+
+    public static function getNavigationGroup(): string
+    {
+        return __('admin.globals.social');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('admin.talents.talents');
+    }
+
+    public static function getSlug(): string
+    {
+        return 'talents';
+    }
+
+    public static function getPluralLabel(): string
+    {
+        return __('admin.talents.talents');
+    }
+
+    public static function getLabel(): string
+    {
+         return __('admin.talents.talent');
+    }
+
 
     public static function getPages(): array
     {
