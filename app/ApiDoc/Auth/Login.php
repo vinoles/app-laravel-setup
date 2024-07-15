@@ -8,7 +8,7 @@ use OpenApi\Annotations as OA;
 /**
  *
  * @OA\Post(
- *     path="/api/v1/login",
+ *     path="/api/v1/auth/login",
  *     operationId="login",
  *     tags={"Auth"},
  *     summary="login user",

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\TalentController;
 use Illuminate\Support\Facades\Route;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
@@ -24,3 +25,9 @@ Route::middleware('auth:sanctum')->group(static function () {
             $server->resource('talents', TalentController::class);
         });
 });
+
+JsonApiRoute::server('v1')
+    ->prefix('v1/auth')
+    ->resources(static function () {
+        Route::post('login', LoginController::class)->name('api.auth.login');
+    });
