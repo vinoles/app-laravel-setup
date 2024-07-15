@@ -68,3 +68,20 @@ make sail command="artisan queue:work redis --queue=scout"
 #generate key
 make sail command="artisan artisan key:generate"
 ```
+
+## Create alias and execute command sail
+
+```bash
+#create alias
+alias sail="./vendor/bin/sail"
+
+# run command
+sail artisan l5-swagger:generate
+
+#install package
+sail composer require bezhansalleh/filament-language-switch
+
+#generate token
+
+sail artisan app:generate-token-user admin@dogme.com password
+```

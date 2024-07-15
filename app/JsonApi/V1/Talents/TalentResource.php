@@ -41,8 +41,7 @@ class TalentResource extends JsonApiResource
     public function deleteMessages(): array
     {
         return [
-            'meta.no_posts.accepted' =>
-              'You cannot delete a talent with posts.',
+            'meta.no_posts.accepted' => 'You cannot delete a talent with posts.',
         ];
     }
 
