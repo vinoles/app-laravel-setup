@@ -22,13 +22,7 @@ class DatabaseSeeder extends Seeder
             $user->assignRole(UserRole::random());
         });
 
-        User::factory()->create([
-            'first_name' => 'Admin',
-            'last_name' => 'Dogme',
-            'email' => 'admin@dogme.com',
-            'password' => Hash::make('password'),
-        ])->assignRole(UserRole::ADMIN);
-
-        $this->call(TalentSeeder::class);
+        $this->call(UserSeeder::class)
+            ->call(TalentSeeder::class);
     }
 }

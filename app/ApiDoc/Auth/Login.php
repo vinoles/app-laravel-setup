@@ -8,7 +8,7 @@ use OpenApi\Annotations as OA;
 /**
  *
  * @OA\Post(
- *     path="/api/v1/login",
+ *     path="/api/v1/auth/login",
  *     operationId="login",
  *     tags={"Auth"},
  *     summary="login user",
@@ -23,7 +23,8 @@ use OpenApi\Annotations as OA;
  *                 @OA\Property(
  *                     property="email",
  *                     type="string",
- *                     format="email"
+ *                     format="email",
+ *                     default="user-test@dogme.com"
  *                 ),
  *                 @OA\Property(
  *                     property="password",

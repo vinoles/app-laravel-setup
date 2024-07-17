@@ -22,7 +22,14 @@ class SignInTest extends TestCase
 
         $response->assertSuccessful();
 
-        $this->assertAuthenticatedAs($user);
+        $data = $response->json('data');
+
+        $meta = $response->json('meta');
+
+        $this->assertEquals($user->uuid, $data['id']);
+        $this->assertEquals('users', $data['type']);
+
+        $this->assertNotEmpty($meta['token']);
     }
 
     /**
