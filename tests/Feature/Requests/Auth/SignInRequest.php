@@ -2,7 +2,6 @@
 
 namespace Tests\Feature\Requests\Auth;
 
-use Laravel\Fortify\RoutePath;
 use Tests\Feature\Requests\PostRequest;
 
 class SignInRequest extends PostRequest
@@ -25,8 +24,6 @@ class SignInRequest extends PostRequest
      */
     public function endpoint(): string
     {
-        $prefix = config('dogme.prefix_api');
-
-        return RoutePath::for('login', "{$prefix}/login");
+        return route('v1.api.auth.login');
     }
 }

@@ -5,7 +5,6 @@ namespace App\ApiDoc\Talents;
 use App\ApiDoc\ApiDoc;
 use OpenApi\Annotations as OA;
 
-
 /**
  *
  * @OA\Get(
@@ -67,7 +66,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Response(
  *         response="422",
  *         description="Unprocessable Entity",
-  *         @OA\JsonContent(
+ *         @OA\JsonContent(
  *             type="object",
  *             @OA\MediaType(
  *                 mediaType="application/vnd.api+json"
@@ -84,7 +83,7 @@ use OpenApi\Annotations as OA;
  *             )
  *         )
  *     ),
-  *     @OA\Response(
+ *     @OA\Response(
  *         response=406,
  *         description="Not Acceptable",
  *         @OA\JsonContent(

@@ -1,15 +1,15 @@
 <?php
 
-namespace App\JsonApi\V1\Talents;
+namespace App\JsonApi\V1\Users;
 
-use App\Models\Talent;
+use App\Models\User;
 use Illuminate\Http\Request;
 use LaravelJsonApi\Core\Resources\JsonApiResource;
 
 /**
- * @property Talent $resource
+ * @property User $resource
  */
-class TalentResource extends JsonApiResource
+class UserResource extends JsonApiResource
 {
     /**
      * Get the resource's attributes.
@@ -21,7 +21,13 @@ class TalentResource extends JsonApiResource
     {
         return [
             'id' => $this->uuid,
-            'hand_preference' => $this->hand_preference,
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
+            'phone' => $this->phone,
+            'address' => $this->address,
+            'city' => $this->city,
+            'province' => $this->province,
+            'birthdate' => $this->birthdate,
         ];
     }
 
@@ -30,9 +36,7 @@ class TalentResource extends JsonApiResource
      */
     public function deleteRules(): array
     {
-        return [
-            'meta.no_posts' => 'accepted',
-        ];
+        return [];
     }
 
     /**
@@ -40,20 +44,16 @@ class TalentResource extends JsonApiResource
      */
     public function deleteMessages(): array
     {
-        return [
-            'meta.no_posts.accepted' => 'You cannot delete a talent with posts.',
-        ];
+        return [];
     }
 
     /**
-     * @param Talent $talent
+     * @param User $talent
      * @return array
      */
-    public function metaForDelete(Talent $talent): array
+    public function metaForDelete(User $talent): array
     {
-        return [
-            'no_posts' => $talent->posts()->doesntExist(),
-        ];
+        return [];
     }
 
     /**
@@ -65,8 +65,7 @@ class TalentResource extends JsonApiResource
     public function relationships($request): iterable
     {
         return [
-            $this->relation('user'),
-            $this->relation('posts'),
+            $this->relation('talent'),
         ];
     }
 }
