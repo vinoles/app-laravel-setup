@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Constants\UserRole;
 use App\Models\Talent;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
@@ -13,7 +14,8 @@ class TalentPolicy
      */
     public function viewAny(User $user): bool
     {
-        return $user->can('view_any_talent');
+        //TODO VERIFY CONDITIONAL
+        return $user->can('view_any_talent') || $user->hasRole(UserRole::TALENT->value);
     }
 
     /**
@@ -21,7 +23,8 @@ class TalentPolicy
      */
     public function view(User $user, Talent $talent): bool
     {
-        return $user->can('view_talent');
+        //TODO VERIFY CONDITIONAL
+        return $user->can('view_talent') || $user->hasRole(UserRole::TALENT->value);
     }
 
     /**
@@ -61,7 +64,7 @@ class TalentPolicy
      */
     public function forceDelete(User $user, Talent $talent): bool
     {
-        return $user->can('force_delete_talent');
+        return $user->can('force_delete_talent') ;
     }
 
     /**

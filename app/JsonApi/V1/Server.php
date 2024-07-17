@@ -3,11 +3,11 @@
 namespace App\JsonApi\V1;
 
 use App\JsonApi\V1\Talents\TalentSchema;
+use App\JsonApi\V1\Users\UserSchema;
 use LaravelJsonApi\Core\Server\Server as BaseServer;
 
 class Server extends BaseServer
 {
-
     /**
      * The base URI namespace for this server.
      *
@@ -33,7 +33,8 @@ class Server extends BaseServer
     protected function allSchemas(): array
     {
         return [
-            TalentSchema::class
+            TalentSchema::class,
+            UserSchema::class,
         ];
     }
 }
