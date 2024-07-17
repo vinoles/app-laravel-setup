@@ -1,15 +1,15 @@
 <?php
 
-namespace App\JsonApi\V1\Talents;
+namespace App\JsonApi\V1\Users;
 
-use App\Models\Talent;
+use App\Models\User;
 use Illuminate\Http\Request;
 use LaravelJsonApi\Core\Resources\JsonApiResource;
 
 /**
- * @property Talent $resource
+ * @property User $resource
  */
-class TalentResource extends JsonApiResource
+class UserResource extends JsonApiResource
 {
     /**
      * Get the resource's attributes.
@@ -48,10 +48,10 @@ class TalentResource extends JsonApiResource
     }
 
     /**
-     * @param Talent $talent
+     * @param User $talent
      * @return array
      */
-    public function metaForDelete(Talent $talent): array
+    public function metaForDelete(User $talent): array
     {
         return [];
     }

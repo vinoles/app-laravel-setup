@@ -67,6 +67,9 @@ make sail command="artisan queue:work redis --queue=scout"
 
 #generate key
 make sail command="artisan artisan key:generate"
+
+#generate api doc
+make api-doc
 ```
 
 ## Create alias and execute command sail

@@ -23,7 +23,8 @@ use OpenApi\Annotations as OA;
  *                 @OA\Property(
  *                     property="email",
  *                     type="string",
- *                     format="email"
+ *                     format="email",
+ *                     default="user-test@dogme.com"
  *                 ),
  *                 @OA\Property(
  *                     property="password",

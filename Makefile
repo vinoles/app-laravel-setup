@@ -1,6 +1,7 @@
+# Sail command
 sail := "./vendor/bin/sail"
 
-#Initial Config
+# Initial Config
 setup: up install migrate seed front-install
 
 # Build containers
@@ -11,14 +12,15 @@ up:
 install:
 	$(sail) composer install
 
-# run test
+# Run tests
 test:
 	$(sail) artisan test
 
+# Clear cache
 cache:
 	$(sail) artisan cache:clear && $(sail) artisan config:clear && $(sail) artisan route:clear
 
-# run filter test
+# Run filtered test
 test_filter:
 	$(sail) artisan test --filter $(file)
 
@@ -26,7 +28,7 @@ test_filter:
 stop:
 	$(sail) down
 
-# Rund migrations
+# Run migrations
 migrate:
 	$(sail) artisan migrate
 
@@ -38,33 +40,47 @@ seed:
 db_fresh:
 	$(sail) artisan migrate:fresh --seed --force
 
+# Refresh test database and migrations
 db_fresh_test:
 	$(sail) artisan migrate:fresh --force --database=pgsql_test
 
+# Rollback migrations
 rollback:
 	$(sail) artisan migrate:rollback
 
+# Tinker
 tinker:
 	$(sail) artisan tinker
 
+# Generate application key
 key:
 	$(sail) artisan key:generate
 
+# Publish language files
 lang:
 	$(sail) artisan lang:publish
 
+# Front-end install
 front-install:
 	$(sail) bun install
 	$(sail) bun run build
 
+# Front-end development
 front-dev:
 	$(sail) bun run dev
 
+# Front-end build
 front-build:
 	$(sail) bun run build
 
+# Shell access
 shell:
 	$(sail) shell
 
+# Sail command
 sail:
 	$(sail) $(command)
+
+# Generate API documentation
+api-doc:
+	$(sail) artisan l5-swagger:generate
