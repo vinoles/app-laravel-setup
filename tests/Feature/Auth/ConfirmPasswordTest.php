@@ -3,6 +3,8 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Http;
 use Tests\Feature\Requests\Auth\ConfirmPasswordRequest;
 use Tests\Feature\TestCase;
 
@@ -49,6 +51,28 @@ class ConfirmPasswordTest extends TestCase
         $data = $response->json('meta');
 
         $this->assertFalse($data["status"]);
+
+    }
+
+    /**
+     * A user cannot confirm password another user
+     *
+     * @test
+     * @return void
+     */
+    public function cannot_confirm_password_another_user(): void
+    {
+        $user = User::factory()->withPassword()->create();
+
+        $otherUser = User::factory()->withPassword()->create();
+
+        $request = ConfirmPasswordRequest::make($otherUser, 'error_password');
+
+        $response = $this->signIn($user)->sendRequestApiPost($request);
+
+        $response->assertForbidden();
+
+        $response->assertStatus(Response::HTTP_FORBIDDEN);
 
     }
 }
