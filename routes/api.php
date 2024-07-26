@@ -29,7 +29,6 @@ Route::middleware('auth:sanctum')->group(static function () {
             Route::prefix('auth')->group(static function () {
                 Route::post('confirm-password/{user}', ConfirmPasswordController::class)
                 ->name('auth.password.confirm');
-                //->middleware([config('fortify.auth_middleware', 'auth').':'.config('fortify.guard')]);
             });
         });
 });
