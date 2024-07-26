@@ -6,8 +6,8 @@ use App\Constants\UserRole;
 use App\Jobs\CreateTalentAfterRegister;
 use App\Models\User;
 use Illuminate\Support\Facades\Queue;
-use Tests\Feature\Api\TestCase;
 use Tests\Feature\Requests\Auth\SignUpRequest;
+use Tests\Feature\TestCase;
 
 class SignUpTest extends TestCase
 {

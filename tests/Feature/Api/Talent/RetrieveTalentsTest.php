@@ -5,8 +5,8 @@ namespace Tests\Feature\Api\Talent;
 use App\Constants\UserRole;
 use App\Models\Talent;
 use App\Models\User;
-use Tests\Feature\Api\TestCase;
 use Tests\Feature\Requests\Api\RetrieveTalentsRequest;
+use Tests\Feature\TestCase;
 
 class RetrieveTalentsTest extends TestCase
 {

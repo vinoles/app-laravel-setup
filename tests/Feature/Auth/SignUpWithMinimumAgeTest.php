@@ -4,8 +4,8 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Support\Carbon;
-use Tests\Feature\Api\TestCase;
 use Tests\Feature\Requests\Auth\SignUpRequest;
+use Tests\Feature\TestCase;
 
 class SignUpWithMinimumAgeTest extends TestCase
 {

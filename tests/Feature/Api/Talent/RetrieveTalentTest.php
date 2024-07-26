@@ -6,8 +6,8 @@ use App\Constants\UserRole;
 use App\Models\Talent;
 use App\Models\User;
 use Illuminate\Http\Response;
-use Tests\Feature\Api\TestCase;
 use Tests\Feature\Requests\Api\RetrieveTalentRequest;
+use Tests\Feature\TestCase;
 
 class RetrieveTalentTest extends TestCase
 {

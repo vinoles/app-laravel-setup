@@ -60,7 +60,7 @@ trait SendsRequests
     }
 
     /**
-     * Send a request to the server.
+     * Send a request get list to the server.
      *
      * @param  mixed  $args
      * @return TestResponse
@@ -77,7 +77,7 @@ trait SendsRequests
     }
 
     /**
-     * Send a request to the server.
+     * Send a request get show to the server.
      *
      * @param  mixed  $args
      * @return TestResponse
@@ -88,5 +88,22 @@ trait SendsRequests
 
         return $this->jsonApi()
             ->get($request->endpoint());
+    }
+
+      /**
+     * Send a post request to the server json api.
+     *
+     * @param  mixed  $args
+     * @return TestResponse
+     */
+    protected function sendRequestApiPost(...$args): TestResponse
+    {
+        $request = Arr::get($args, 0);
+
+        return $this
+            ->jsonApi()
+            ->asFormUrlEncoded()
+            ->withPayload($request->payload())
+            ->post($request->endpoint());
     }
 }

@@ -24,7 +24,7 @@ class RetrieveTalentsRequest extends GetRequest
      */
     public function endpoint(): string
     {
-        return route('api.talents.index');
+        return route('v1.api.talents.index');
     }
 
     /**
