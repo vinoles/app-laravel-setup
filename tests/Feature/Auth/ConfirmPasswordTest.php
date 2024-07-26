@@ -4,7 +4,6 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Tests\Feature\Requests\Auth\ConfirmPasswordRequest;
-use Tests\Feature\Requests\Auth\SignInRequest;
 use Tests\Feature\TestCase;
 
 class ConfirmPasswordTest extends TestCase
