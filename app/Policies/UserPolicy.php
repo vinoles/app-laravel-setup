@@ -141,4 +141,16 @@ class UserPolicy
     {
         return $user->can('reorder_user');
     }
+
+    /**
+     * Determine whether the user can reorder.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\User  $model
+     * @return bool
+     */
+    public function confirmPassword(User $user, User $model): bool
+    {
+        return $user->uuid == $model->uuid;
+    }
 }

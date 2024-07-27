@@ -3,8 +3,8 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
-use Tests\Feature\Api\TestCase;
 use Tests\Feature\Requests\Auth\SignUpRequest;
+use Tests\Feature\TestCase;
 
 class SignUpAttributesRequiredTest extends TestCase
 {
