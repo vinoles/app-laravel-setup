@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ConfirmPasswordRequest;
-use App\Http\Requests\SignInRequest;
 use App\Models\User;
 use Illuminate\Contracts\Auth\StatefulGuard;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 use Laravel\Fortify\Fortify;
 use LaravelJsonApi\Core\Responses\MetaResponse;
 
