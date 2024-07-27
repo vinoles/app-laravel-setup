@@ -39,7 +39,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Response(
  *       response="200",
  *       description="Login Successful",
- *         @OA\JsonContent(ref="#/components/schemas/LoginResponse"),
+ *         @OA\JsonContent(ref="#/components/schemas/LoginAndRegisterResponse"),
  *     ),
  *     @OA\Response(
  *         response="422",

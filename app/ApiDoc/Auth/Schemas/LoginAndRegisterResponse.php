@@ -127,4 +127,6 @@ use OpenApi\Annotations as OA;
  *     )
  * )
  */
-class LoginResponse {}
+class LoginAndRegisterResponse
+{
+}
