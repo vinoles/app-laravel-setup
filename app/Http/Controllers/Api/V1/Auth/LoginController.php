@@ -15,9 +15,9 @@ class LoginController extends Controller
      * Handle the incoming request.
      *
      * @param  SignInRequest  $request
-     * @return \Illuminate\Http\Response
+     * @return DataResponse
      */
-    public function __invoke(SignInRequest $request)
+    public function __invoke(SignInRequest $request): DataResponse
     {
         $email = $request->get('email');
 

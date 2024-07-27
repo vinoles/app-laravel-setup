@@ -4,10 +4,10 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Support\Carbon;
-use Tests\Feature\Requests\Auth\SignUpRequest;
+use Tests\Feature\Requests\Auth\RegisterRequest;
 use Tests\Feature\TestCase;
 
-class SignUpWithMinimumAgeTest extends TestCase
+class RegisterWithMinimumAgeTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -29,7 +29,7 @@ class SignUpWithMinimumAgeTest extends TestCase
             ->withBirthdate($birthdate)
             ->make();
 
-        $request = SignUpRequest::make($user);
+        $request = RegisterRequest::make($user);
 
         $response = $this->sendRequest($request);
 
@@ -50,7 +50,7 @@ class SignUpWithMinimumAgeTest extends TestCase
             ->withBirthdate($birthdate)
             ->make();
 
-        $request = SignUpRequest::make($user);
+        $request = RegisterRequest::make($user);
 
         $response = $this
             ->sendRequest($request);
