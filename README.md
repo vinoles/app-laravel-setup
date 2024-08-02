@@ -48,8 +48,10 @@ make front-dev
 http://dogme-app.local:8099
 
 #Admin
-
 http://dogme-app.local:8099/admin/login
+
+#Api
+http://dogme-app.local:8099/api/v1/documentation
 ```
 
 ## Command install o artisan command
@@ -72,12 +74,15 @@ make sail command="artisan artisan key:generate"
 make api-doc
 ```
 
-## Create alias and execute command sail
+## Create sail alias
 
 ```bash
 #create alias
 alias sail="./vendor/bin/sail"
+```
 
+## Execute command example
+```bash
 # run command
 sail artisan l5-swagger:generate
 
