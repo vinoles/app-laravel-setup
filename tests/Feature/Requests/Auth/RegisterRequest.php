@@ -6,10 +6,9 @@ use App\Constants\UserRole;
 use App\Models\User;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
-use Laravel\Fortify\RoutePath;
 use Tests\Feature\Requests\PostRequest;
 
-class SignUpRequest extends PostRequest
+class RegisterRequest extends PostRequest
 {
     /**
      * Create a new instance of the request.
@@ -30,9 +29,7 @@ class SignUpRequest extends PostRequest
      */
     public function endpoint(): string
     {
-        $prefix = config('dogme.prefix_api');
-
-        return RoutePath::for('register', "{$prefix}/register");
+        return route('v1.api.auth.register');
     }
 
     /**
@@ -105,11 +102,10 @@ class SignUpRequest extends PostRequest
      * @param  UserRole  $role
      * @return static
      */
-    public function  setRole(UserRole $role): static
+    public function setRole(UserRole $role): static
     {
         $this->set('role', $role);
 
         return $this;
     }
-
 }

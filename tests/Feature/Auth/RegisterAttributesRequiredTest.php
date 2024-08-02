@@ -3,12 +3,11 @@
 namespace Tests\Feature\Auth;
 
 use App\Models\User;
-use Tests\Feature\Api\TestCase;
-use Tests\Feature\Requests\Auth\SignUpRequest;
+use Tests\Feature\Requests\Auth\RegisterRequest;
+use Tests\Feature\TestCase;
 
-class SignUpAttributesRequiredTest extends TestCase
+class RegisterAttributesRequiredTest extends TestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -25,7 +24,7 @@ class SignUpAttributesRequiredTest extends TestCase
     {
         $user = User::factory()->make();
 
-        $request = SignUpRequest::make()
+        $request = RegisterRequest::make()
             ->fillPayloadAndRemoveAttribute($user, ['email']);
 
         $response = $this->sendRequest($request);
@@ -50,7 +49,7 @@ class SignUpAttributesRequiredTest extends TestCase
 
         $newUser = User::factory()->make($user->getAttributes());
 
-        $request = SignUpRequest::make($newUser);
+        $request = RegisterRequest::make($newUser);
 
         $response = $this
             ->sendRequest($request);
@@ -71,7 +70,7 @@ class SignUpAttributesRequiredTest extends TestCase
     {
         $user = User::factory()->create();
 
-        $request = SignUpRequest::make()
+        $request = RegisterRequest::make()
             ->fillPayloadAndRemoveAttribute(
                 $user,
                 [

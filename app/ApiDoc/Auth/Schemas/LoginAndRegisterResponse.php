@@ -1,0 +1,132 @@
+<?php
+
+namespace App\ApiDoc\AUth\Schemas;
+
+use OpenApi\Annotations as OA;
+
+/**
+ * @OA\Schema(
+ *     type="object",
+ *     @OA\Property(
+ *         property="meta",
+ *         type="object",
+ *         @OA\Property(
+ *             property="token",
+ *             type="string",
+ *             example="5|X46fIoLGotBF4AiSTnjykT5fECyymL6RuxhY1PU722b37b1b"
+ *         )
+ *     ),
+ *     @OA\Property(
+ *         property="jsonapi",
+ *         type="object",
+ *         @OA\Property(
+ *             property="version",
+ *             type="string",
+ *             example="1.0"
+ *         )
+ *     ),
+ *     @OA\Property(
+ *         property="links",
+ *         type="object",
+ *         @OA\Property(
+ *             property="self",
+ *             type="string",
+ *             example="http://dogme-app.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9"
+ *         )
+ *     ),
+ *     @OA\Property(
+ *         property="data",
+ *         type="object",
+ *         @OA\Property(
+ *             property="type",
+ *             type="string",
+ *             example="users"
+ *         ),
+ *         @OA\Property(
+ *             property="id",
+ *             type="string",
+ *             example="6bb7c993-88ad-402c-9352-c7eb65d9b8e9"
+ *         ),
+ *         @OA\Property(
+ *             property="attributes",
+ *             type="object",
+ *             @OA\Property(
+ *                 property="id",
+ *                 type="string",
+ *                 example="6bb7c993-88ad-402c-9352-c7eb65d9b8e9"
+ *             ),
+ *             @OA\Property(
+ *                 property="first_name",
+ *                 type="string",
+ *                 example="Dogme"
+ *             ),
+ *             @OA\Property(
+ *                 property="last_name",
+ *                 type="string",
+ *                 example="Test"
+ *             ),
+ *             @OA\Property(
+ *                 property="phone",
+ *                 type="string",
+ *                 example="419-485-0292"
+ *             ),
+ *             @OA\Property(
+ *                 property="address",
+ *                 type="string",
+ *                 example="27369 Bettie Lock Suite 220"
+ *             ),
+ *             @OA\Property(
+ *                 property="city",
+ *                 type="string",
+ *                 example="Port Candidostad"
+ *             ),
+ *             @OA\Property(
+ *                 property="province",
+ *                 type="string",
+ *                 nullable=true,
+ *                 example=null
+ *             ),
+ *             @OA\Property(
+ *                 property="birthdate",
+ *                 type="string",
+ *                 format="date-time",
+ *                 example="2007-07-17T00:00:00.000000Z"
+ *             )
+ *         ),
+ *         @OA\Property(
+ *             property="relationships",
+ *             type="object",
+ *             @OA\Property(
+ *                 property="talent",
+ *                 type="object",
+ *                 @OA\Property(
+ *                     property="links",
+ *                     type="object",
+ *                     @OA\Property(
+ *                         property="related",
+ *                         type="string",
+ *                         example="http://dogme-app.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9/talent"
+ *                     ),
+ *                     @OA\Property(
+ *                         property="self",
+ *                         type="string",
+ *                         example="http://dogme-app.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9/relationships/talent"
+ *                     )
+ *                 )
+ *             )
+ *         ),
+ *         @OA\Property(
+ *             property="links",
+ *             type="object",
+ *             @OA\Property(
+ *                 property="self",
+ *                 type="string",
+ *                 example="http://dogme-app.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9"
+ *             )
+ *         )
+ *     )
+ * )
+ */
+class LoginAndRegisterResponse
+{
+}

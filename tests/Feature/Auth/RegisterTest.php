@@ -6,10 +6,10 @@ use App\Constants\UserRole;
 use App\Jobs\CreateTalentAfterRegister;
 use App\Models\User;
 use Illuminate\Support\Facades\Queue;
-use Tests\Feature\Api\TestCase;
-use Tests\Feature\Requests\Auth\SignUpRequest;
+use Tests\Feature\Requests\Auth\RegisterRequest;
+use Tests\Feature\TestCase;
 
-class SignUpTest extends TestCase
+class RegisterTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -18,9 +18,7 @@ class SignUpTest extends TestCase
         Queue::fake();
 
         $this->artisan('db:seed', ['--class' => 'ShieldSeeder']);
-
     }
-
 
     /**
      * Sign up happy path
@@ -32,7 +30,7 @@ class SignUpTest extends TestCase
     {
         $user = User::factory()->make();
 
-        $request = SignUpRequest::make($user);
+        $request = RegisterRequest::make($user);
 
         $response = $this->sendRequest($request);
 
@@ -59,7 +57,7 @@ class SignUpTest extends TestCase
     {
         $user = User::factory()->make();
 
-        $request = SignUpRequest::make($user)->setRole(UserRole::TALENT);
+        $request = RegisterRequest::make($user)->setRole(UserRole::TALENT);
 
         $response = $this->sendRequest($request);
 
@@ -75,6 +73,6 @@ class SignUpTest extends TestCase
             'phone' => $user->phone,
         ]);
 
-       Queue::assertPushed(CreateTalentAfterRegister::class);
+        Queue::assertPushed(CreateTalentAfterRegister::class);
     }
 }
