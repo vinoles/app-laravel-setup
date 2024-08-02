@@ -82,6 +82,7 @@ alias sail="./vendor/bin/sail"
 ```
 
 ## Execute command example
+
 ```bash
 # run command
 sail artisan l5-swagger:generate
@@ -90,6 +91,6 @@ sail artisan l5-swagger:generate
 sail composer require bezhansalleh/filament-language-switch
 
 #generate token
-
 sail artisan app:generate-token-user admin@dogme.com password
 ```
+# Read the make file for more commands
