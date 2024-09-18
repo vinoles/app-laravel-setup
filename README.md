@@ -1,4 +1,4 @@
-# DOGME APP
+# APP LARAVEL SETUP
 
 ## Requirements
 
@@ -9,10 +9,10 @@
 
 ```bash
 # After cloning the project
-cd ./dogme-app
+cd ./app-laravel-setup
 
 # Add the project to hosts file
-sudo sh -c "echo '127.0.0.1 dogme-app.local' >> /etc/hosts"
+sudo sh -c "echo '127.0.0.1 app-laravel-setup.local' >> /etc/hosts"
 
 # Install sail
 docker run --rm \
@@ -45,13 +45,13 @@ make front-dev
 ```bash
 
 #WEB
-http://dogme-app.local:8099
+http://app-laravel-setup.local:8099
 
 #Admin
-http://dogme-app.local:8099/admin/login
+http://app-laravel-setup.local:8099/admin/login
 
 #Api
-http://dogme-app.local:8099/api/v1/documentation
+http://app-laravel-setup.local:8099/api/v1/documentation
 ```
 
 ## Command install o artisan command
@@ -91,6 +91,6 @@ sail artisan l5-swagger:generate
 sail composer require bezhansalleh/filament-language-switch
 
 #generate token
-sail artisan app:generate-token-user admin@dogme.com password
+sail artisan app:generate-token-user admin@app.com password
 ```
 # Read the make file for more commands

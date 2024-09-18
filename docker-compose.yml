@@ -1,5 +1,5 @@
 services:
-    dogme.test:
+    app-laravel-setup.test:
         build:
             context: ./docker/8.3
             dockerfile: Dockerfile

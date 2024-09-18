@@ -6,7 +6,7 @@ use OpenApi\Annotations as OA;
 
 /**
  * @OA\Info(
- *    title="DOGME API Documentation",
+ *    title="APP API Documentation",
  *    version="1.0.0",
  * )
  *

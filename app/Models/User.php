@@ -79,7 +79,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         return $this->hasRole(Utils::getSuperAdminName()) ||
             $this->hasRole(Utils::getPanelUserRoleName()) ||
             $this->hasRole(UserRole::ADMIN) ||
-            $this->hasRole(UserRole::DOGME_USER);
+            $this->hasRole(UserRole::APP_USER);
     }
 
     /**

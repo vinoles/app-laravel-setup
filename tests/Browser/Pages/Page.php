@@ -15,7 +15,7 @@ abstract class Page extends BasePage
         );
 
         return Str::replace(
-            'http://dogme.test',
+            'http://app-laravel-setup.test',
             'https://nginx',
             $route,
         );

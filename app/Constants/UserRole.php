@@ -15,7 +15,7 @@ enum UserRole: string
     case SCOUT = 'scout';
     case SPORTS_AGENT = 'sports_agent';
     case SPONSOR =  'sponsor';
-    case DOGME_USER = 'dogme_user';
+    case APP_USER = 'app_user';
     case ADMIN = 'admin';
     case SUPER_ADMIN = 'super_admin';
 }

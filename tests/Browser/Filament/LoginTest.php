@@ -28,7 +28,7 @@ class LoginTest extends DuskTestCase
             $page = new Login;
 
             $browser->visit($page)
-                ->waitForText(__('DOGME'))
+                ->waitForText(__('APP'))
                 ->assertPresent('@email')
                 ->assertPresent('@password')
                 ->assertPresent('@submit')
@@ -50,7 +50,7 @@ class LoginTest extends DuskTestCase
             $page = new Login;
 
             $browser->visit($page)
-                ->waitForText(__('DOGME'))
+                ->waitForText(__('APP'))
                 ->assertPresent('@email')
                 ->assertPresent('@password')
                 ->assertPresent('@submit')

@@ -48,7 +48,7 @@ return [
             'scout' => 'Cazador',
             'sports_agent' => 'Agente deportivo',
             'sponsor' => 'Patrocinador',
-            'dogme_user' => 'dogme',
+            'app_user' => 'app_user',
             'admin' => 'Administrador',
         ],
     ],

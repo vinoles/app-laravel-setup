@@ -31,7 +31,7 @@ use OpenApi\Annotations as OA;
  *         @OA\Property(
  *             property="self",
  *             type="string",
- *             example="http://dogme-app.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9"
+ *             example="http://app-laravel-setup.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9"
  *         )
  *     ),
  *     @OA\Property(
@@ -105,12 +105,12 @@ use OpenApi\Annotations as OA;
  *                     @OA\Property(
  *                         property="related",
  *                         type="string",
- *                         example="http://dogme-app.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9/talent"
+ *                         example="http://app-laravel-setup.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9/talent"
  *                     ),
  *                     @OA\Property(
  *                         property="self",
  *                         type="string",
- *                         example="http://dogme-app.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9/relationships/talent"
+ *                         example="http://app-laravel-setup.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9/relationships/talent"
  *                     )
  *                 )
  *             )
@@ -121,7 +121,7 @@ use OpenApi\Annotations as OA;
  *             @OA\Property(
  *                 property="self",
  *                 type="string",
- *                 example="http://dogme-app.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9"
+ *                 example="http://app-laravel-setup.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9"
  *             )
  *         )
  *     )

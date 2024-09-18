@@ -19,14 +19,14 @@ class UserSeeder extends Seeder
         User::factory()->create([
             'first_name' => 'Admin',
             'last_name' => 'Dogme',
-            'email' => 'admin@dogme.com',
+            'email' => 'admin@app.com',
             'password' => Hash::make($password),
         ])->assignRole(UserRole::ADMIN);
 
         User::factory()->create([
             'first_name' => 'Dogme',
             'last_name' => 'Test',
-            'email' => 'user-test@dogme.com',
+            'email' => 'user-test@app.com',
             'password' => Hash::make($password),
         ])->assignRole(UserRole::TALENT);
     }

@@ -45,7 +45,7 @@ class CreateNewUser implements CreatesNewUsers
     public function rules(): array
     {
         $allowedBirthdate = now()
-            ->subYears(config('dogme.minimum_age'))->format('Y-m-d');
+            ->subYears(config('app_laravel_setup.minimum_age'))->format('Y-m-d');
 
         return [
             'email' => [

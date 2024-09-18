@@ -58,7 +58,7 @@ class RegisterWithMinimumAgeTest extends TestCase
         $response->assertJsonValidationErrors('birthdate');
 
         $allowedBirthdate = Carbon::now()
-            ->subYears(config('dogme.minimum_age'))->format('Y-m-d');
+            ->subYears(config('app_laravel_setup.minimum_age'))->format('Y-m-d');
 
         $response->assertJsonPath(
             'message',
