@@ -32,10 +32,6 @@ class RegisterController extends Controller
             )
         )->assignRole($role);
 
-        if ($role === UserRole::TALENT->value) {
-            CreateTalentAfterRegister::dispatch($user);
-        }
-
         $token = $user->createToken('Device')->plainTextToken;
 
         return DataResponse::make($user)

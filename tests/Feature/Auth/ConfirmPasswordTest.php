@@ -4,7 +4,6 @@ namespace Tests\Feature\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Http;
 use Tests\Feature\Requests\Auth\ConfirmPasswordRequest;
 use Tests\Feature\TestCase;
 

@@ -37,6 +37,7 @@ services:
             POSTGRES_PASSWORD: "${DB_PASSWORD}"
         volumes:
             - "sail-postgres:/var/lib/postgresql/data"
+            - './docker/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/app_laravel_setup_test.sql'
         networks:
             - sail
     redis:

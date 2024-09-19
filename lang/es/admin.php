@@ -27,16 +27,6 @@ return [
         'updated_at' => 'Modificado',
         'deleted_at' => 'Borrado',
     ],
-    'talents' => [
-        'talents' => 'Talentos',
-        'talent' => 'Talento',
-        'hand_preference' => 'Mano de preferencia',
-        'hand_preferences' => [
-            'left' => 'Zurdo',
-            'right' => 'Derecho',
-            'ambidextrous' => 'Ambas manos',
-        ],
-    ],
     'users' => [
         'users' => 'Usuarios',
         'user' => 'Usuario',
@@ -44,12 +34,8 @@ return [
         'role' => 'Rol',
         'roles' => [
             'user' => 'Ususarios',
-            'talent' => 'Telentos',
-            'scout' => 'Cazador',
-            'sports_agent' => 'Agente deportivo',
-            'sponsor' => 'Patrocinador',
-            'app_user' => 'app_user',
             'admin' => 'Administrador',
+            'super_admin' => 'Super Administrador',
         ],
     ],
 

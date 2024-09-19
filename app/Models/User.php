@@ -11,7 +11,6 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -20,12 +19,12 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements FilamentUser, HasName
 {
-    use HasApiTokens,
-        HasFactory,
-        Notifiable,
-        HasUuid,
-        SoftDeletes,
-        HasRoles;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use HasUuid;
+    use SoftDeletes;
+    use HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -79,14 +78,6 @@ class User extends Authenticatable implements FilamentUser, HasName
         return $this->hasRole(Utils::getSuperAdminName()) ||
             $this->hasRole(Utils::getPanelUserRoleName()) ||
             $this->hasRole(UserRole::ADMIN) ||
-            $this->hasRole(UserRole::APP_USER);
-    }
-
-    /**
-     * Get the talent associated with the user.
-     */
-    public function talent(): HasOne
-    {
-        return $this->hasOne(Talent::class);
+            $this->hasRole(UserRole::USER);
     }
 }

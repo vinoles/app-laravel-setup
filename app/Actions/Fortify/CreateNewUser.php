@@ -33,10 +33,6 @@ class CreateNewUser implements CreatesNewUsers
             )
         )->assignRole($role);
 
-        if($role === UserRole::TALENT->value) {
-            CreateTalentAfterRegister::dispatch($user);
-        }
-
         return $user;
 
 

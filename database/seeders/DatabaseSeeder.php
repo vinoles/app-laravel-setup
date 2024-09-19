@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             $user->assignRole(UserRole::random());
         });
 
-        $this->call(UserSeeder::class)
-            ->call(TalentSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }

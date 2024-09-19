@@ -24,17 +24,8 @@ return [
         'updated_at' => 'Updated At',
         'deleted_at' => 'Deleted At'
     ],
-    'talents' => [
-        'talents' => 'Talents',
-        'talent' => 'Talent',
-        'hand_preference' => 'Hand preference',
-        'left' => 'Left',
-        'right' => 'Right',
-        'ambidextrous' => 'Ambidextrous'
-    ],
     'users' => [
         'users' => 'Users',
         'user' => 'User',
     ]
-
 ];

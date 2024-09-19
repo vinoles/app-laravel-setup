@@ -3,7 +3,7 @@
 namespace Tests\Feature\Auth;
 
 use App\Constants\UserRole;
-use App\Jobs\CreateTalentAfterRegister;
+use App\Jobs\CreateuserAfterRegister;
 use App\Models\User;
 use Illuminate\Support\Facades\Queue;
 use Tests\Feature\Requests\Auth\RegisterRequest;
@@ -48,16 +48,16 @@ class RegisterTest extends TestCase
     }
 
     /**
-     * Sign up and create talent profile
+     * Sign up and create user profile
      *
      * @test
      * @return void
      */
-    public function sign_up_and_create_talent_profile(): void
+    public function sign_up_and_create_user_profile(): void
     {
         $user = User::factory()->make();
 
-        $request = RegisterRequest::make($user)->setRole(UserRole::TALENT);
+        $request = RegisterRequest::make($user)->setRole(UserRole::USER);
 
         $response = $this->sendRequest($request);
 
@@ -72,7 +72,5 @@ class RegisterTest extends TestCase
             'postal_code' => $user->postal_code,
             'phone' => $user->phone,
         ]);
-
-        Queue::assertPushed(CreateTalentAfterRegister::class);
     }
 }

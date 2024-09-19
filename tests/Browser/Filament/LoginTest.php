@@ -10,7 +10,6 @@ use Tests\DuskTestCase;
 
 class LoginTest extends DuskTestCase
 {
-
     protected function setUp(): void
     {
         parent::setUp();
@@ -25,7 +24,7 @@ class LoginTest extends DuskTestCase
     public function login_page(): void
     {
         $this->browse(function (Browser $browser) {
-            $page = new Login;
+            $page = new Login();
 
             $browser->visit($page)
                 ->waitForText(__('APP'))
@@ -47,7 +46,7 @@ class LoginTest extends DuskTestCase
 
             $user->assignRole(UserRole::ADMIN);
 
-            $page = new Login;
+            $page = new Login();
 
             $browser->visit($page)
                 ->waitForText(__('APP'))
@@ -55,8 +54,7 @@ class LoginTest extends DuskTestCase
                 ->assertPresent('@password')
                 ->assertPresent('@submit')
                 ->submitSignInForm($user, 'password')
-                ->waitForLink(__('admin.talents.talents'))
-                ->assertSee(__('admin.talents.talents'))
+                ->waitForLink(__('admin.users.users'))
                 ->assertSee(__('admin.users.users'))
                 ->pause(5000)
                 ->screenshot('dashboard_page');

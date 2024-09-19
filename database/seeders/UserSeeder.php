@@ -24,10 +24,10 @@ class UserSeeder extends Seeder
         ])->assignRole(UserRole::ADMIN);
 
         User::factory()->create([
-            'first_name' => 'Dogme',
+            'first_name' => 'User',
             'last_name' => 'Test',
             'email' => 'user-test@app.com',
             'password' => Hash::make($password),
-        ])->assignRole(UserRole::TALENT);
+        ])->assignRole(UserRole::USER);
     }
 }
