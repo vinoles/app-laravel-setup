@@ -1,21 +1,12 @@
 <?php
 
-namespace App\ApiDoc\AUth\Schemas;
+namespace App\ApiDoc\Users\Schemas;
 
 use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(
  *     type="object",
- *     @OA\Property(
- *         property="meta",
- *         type="object",
- *         @OA\Property(
- *             property="token",
- *             type="string",
- *             example="5|X46fIoLGotBF4AiSTnjykT5fECyymL6RuxhY1PU722b37b1b"
- *         )
- *     ),
  *     @OA\Property(
  *         property="jsonapi",
  *         type="object",
@@ -63,6 +54,6 @@ use OpenApi\Annotations as OA;
  *     )
  * )
  */
-class LoginAndRegisterResponse
+class UserApiResponse
 {
 }

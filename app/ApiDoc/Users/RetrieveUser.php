@@ -27,12 +27,7 @@ use OpenApi\Annotations as OA;
  *     @OA\Response(
  *       response="200",
  *       description="Retrieve User Successfully",
- *         @OA\JsonContent(
- *             type="object",
- *             @OA\MediaType(
- *                 mediaType="application/vnd.api+json"
- *             )
- *         )
+ *       @OA\JsonContent(ref="#/components/schemas/UserApiResponse"),
  *     ),
  *     @OA\Response(
  *         response="422",

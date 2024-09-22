@@ -1,21 +1,12 @@
 <?php
 
-namespace App\ApiDoc\AUth\Schemas;
+namespace App\ApiDoc\Users\Schemas;
 
 use OpenApi\Annotations as OA;
 
 /**
  * @OA\Schema(
  *     type="object",
- *     @OA\Property(
- *         property="meta",
- *         type="object",
- *         @OA\Property(
- *             property="token",
- *             type="string",
- *             example="5|X46fIoLGotBF4AiSTnjykT5fECyymL6RuxhY1PU722b37b1b"
- *         )
- *     ),
  *     @OA\Property(
  *         property="jsonapi",
  *         type="object",
@@ -29,9 +20,19 @@ use OpenApi\Annotations as OA;
  *         property="links",
  *         type="object",
  *         @OA\Property(
- *             property="self",
+ *             property="first",
  *             type="string",
- *             example="http://app-laravel-setup.local:8099/api/v1/users/6bb7c993-88ad-402c-9352-c7eb65d9b8e9"
+ *             example="http://app-laravel-setup.local:8099/api/v1/users?page%5Bnumber%5D=1&page%5Bsize%5D=10&sort=-createdAt"
+ *         ),
+ *         @OA\Property(
+ *             property="last",
+ *             type="string",
+ *             example="http://app-laravel-setup.local:8099/api/v1/users?page%5Bnumber%5D=4&page%5Bsize%5D=10&sort=-createdAt"
+ *         ),
+ *         @OA\Property(
+ *             property="next",
+ *             type="string",
+ *             example="http://app-laravel-setup.local:8099/api/v1/users?page%5Bnumber%5D=2&page%5Bsize%5D=10&sort=-createdAt"
  *         )
  *     ),
  *     @OA\Property(
@@ -49,7 +50,10 @@ use OpenApi\Annotations as OA;
  *         ),
  *         @OA\Property(
  *             property="attributes",
- *             ref="#/components/schemas/UserAttributes"
+ *             type="array",
+ *             @OA\Items(
+ *                 ref="#/components/schemas/UserAttributes",
+ *             ),
  *         ),
  *         @OA\Property(
  *             property="links",
@@ -63,6 +67,6 @@ use OpenApi\Annotations as OA;
  *     )
  * )
  */
-class LoginAndRegisterResponse
+class UsersApiResponse
 {
 }
