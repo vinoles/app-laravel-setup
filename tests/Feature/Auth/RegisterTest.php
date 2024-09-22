@@ -3,7 +3,6 @@
 namespace Tests\Feature\Auth;
 
 use App\Constants\UserRole;
-use App\Jobs\CreateuserAfterRegister;
 use App\Models\User;
 use Illuminate\Support\Facades\Queue;
 use Tests\Feature\Requests\Auth\RegisterRequest;

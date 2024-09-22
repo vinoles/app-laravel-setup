@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Constants\UserRole;
 use App\Models\Concerns\HasUuid;
+use App\Observers\UserObserver;
 use BezhanSalleh\FilamentShield\Support\Utils;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
@@ -16,7 +17,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
+#[ObservedBy([UserObserver::class])]
 class User extends Authenticatable implements FilamentUser, HasName
 {
     use HasApiTokens;

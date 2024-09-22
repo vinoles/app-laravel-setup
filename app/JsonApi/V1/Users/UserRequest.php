@@ -2,12 +2,16 @@
 
 namespace App\JsonApi\V1\Users;
 
+use App\Actions\Fortify\PasswordValidationRules;
 use App\Constants\UserRole;
 use Illuminate\Validation\Rule;
 use LaravelJsonApi\Laravel\Http\Requests\ResourceRequest;
 
 class UserRequest extends ResourceRequest
 {
+    use PasswordValidationRules;
+
+
     /**
      * Get the validation rules for the resource.
      *
@@ -39,7 +43,7 @@ class UserRequest extends ResourceRequest
                 'date',
                 "before_or_equal:{$allowedBirthdate}",
             ],
-            'role' => ['required', 'string', Rule::enum(UserRole::class)],
+            // 'role' => ['required', 'string', Rule::enum(UserRole::class)],
             'password' => $this->passwordRules(),
         ];
 

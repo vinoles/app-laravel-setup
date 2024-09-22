@@ -90,7 +90,7 @@ trait SendsRequests
             ->get($request->endpoint());
     }
 
-      /**
+    /**
      * Send a post request to the server json api.
      *
      * @param  mixed  $args
@@ -100,10 +100,12 @@ trait SendsRequests
     {
         $request = Arr::get($args, 0);
 
+        $data['type'] = $request->type();
+        $data['attributes'] = $request->payload();
+
         return $this
             ->jsonApi()
-            ->asFormUrlEncoded()
-            ->withPayload($request->payload())
+            ->withData($data)
             ->post($request->endpoint());
     }
 }
