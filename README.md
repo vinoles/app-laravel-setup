@@ -1,9 +1,14 @@
 # APP LARAVEL SETUP
 
+A demo application to illustrate how [Laravel JSON:API](https://laraveljsonapi.io/docs/) works with [Laravel](https://laravel.com/) and [FIlamentPhp](https://filamentphp.com/docs).
+
 ## Requirements
 
 -   docker
 -   docker-compose
+-   https://filamentphp.com/docs
+-   https://laraveljsonapi.io/docs/
+-   https://laravel.com/
 
 ## How to run
 
@@ -22,26 +27,35 @@ docker run --rm \
     laravelsail/php83-composer:latest \
     composer install --ignore-platform-reqs
 
-# Setup envs
+## Setup envs
 cp .env.example .env
 cp .env.example .env.testing
 cp .env.example .env.dusk.local
 #Build containers
 make setup
 
-# Start all containers
+## Start all containers
 make up
 
-# Stop all containers
-# Se Eliminan
-# make stop
+## Migrations and seed
+make migrate
+make seed
+
+## 0r run migrations seed
+make db_fresh
+
+## Migrate db test
+make db_fresh_test
+
+
+## Stop all containers
+make stop
 
 # Run dev
 make front-dev
+
 ```
-
 ## WEB
-
 ```bash
 
 #WEB
