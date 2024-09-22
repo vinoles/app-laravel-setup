@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use LaravelJsonApi\Laravel\Http\Controllers\Actions;
 
-class TalentController extends Controller
+class UserController extends Controller
 {
+
     use Actions\FetchMany;
     use Actions\FetchOne;
+    use Actions\Store;
     use Actions\Update;
     use Actions\Destroy;
     use Actions\FetchRelated;
@@ -16,4 +18,5 @@ class TalentController extends Controller
     use Actions\UpdateRelationship;
     use Actions\AttachRelationship;
     use Actions\DetachRelationship;
+
 }

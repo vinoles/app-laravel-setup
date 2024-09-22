@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\V1\Auth\ConfirmPasswordController;
 use App\Http\Controllers\Api\V1\Auth\LoginController;
 use App\Http\Controllers\Api\V1\Auth\RegisterController;
 use App\Http\Controllers\Api\V1\TalentController;
+use App\Http\Controllers\Api\V1\UserController;
 use Illuminate\Support\Facades\Route;
 use LaravelJsonApi\Laravel\Facades\JsonApiRoute;
 use LaravelJsonApi\Laravel\Routing\ResourceRegistrar;
@@ -24,7 +25,7 @@ Route::middleware('auth:sanctum')->group(static function () {
         ->prefix('v1')
         ->name('v1.api.')
         ->resources(static function (ResourceRegistrar $server) {
-            $server->resource('talents', TalentController::class);
+            $server->resource('users', UserController::class);
 
             Route::prefix('auth')->group(static function () {
                 Route::post('confirm-password/{user}', ConfirmPasswordController::class)

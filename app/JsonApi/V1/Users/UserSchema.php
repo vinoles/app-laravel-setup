@@ -7,6 +7,7 @@ use LaravelJsonApi\Eloquent\Contracts\Paginator;
 use LaravelJsonApi\Eloquent\Fields\DateTime;
 use LaravelJsonApi\Eloquent\Fields\ID;
 use LaravelJsonApi\Eloquent\Fields\Str;
+use LaravelJsonApi\Eloquent\Filters\Where;
 use LaravelJsonApi\Eloquent\Filters\WhereIdIn;
 use LaravelJsonApi\Eloquent\Pagination\PagePagination;
 use LaravelJsonApi\Eloquent\Schema;
@@ -37,7 +38,7 @@ class UserSchema extends Schema
     public function fields(): array
     {
         return [
-            ID::make(),
+            ID::make()->uuid(),
             Str::make('first_name'),
             Str::make('last_name'),
             Str::make('phone'),
@@ -60,6 +61,7 @@ class UserSchema extends Schema
     {
         return [
             WhereIdIn::make($this),
+            Where::make('first_name'),
         ];
     }
 
@@ -84,10 +86,10 @@ class UserSchema extends Schema
     }
 
     /**
-     * Determine if the resource is authorizable.
-     *
-     * @return bool
-     */
+      * Determine if the resource is authorizable.
+      *
+      * @return bool
+      */
     public function authorizable(): bool
     {
         return true;

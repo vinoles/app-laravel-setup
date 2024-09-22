@@ -4,9 +4,8 @@ namespace Tests\Feature\Requests\Api;
 
 use Tests\Feature\Requests\GetRequest;
 
-class RetrieveTalentsRequest extends GetRequest
+class RetrieveUsersRequest extends GetRequest
 {
-
     /**
      * Create a new instance of the request.
      *
@@ -24,7 +23,7 @@ class RetrieveTalentsRequest extends GetRequest
      */
     public function endpoint(): string
     {
-        return route('v1.api.talents.index');
+        return route('v1.api.users.index');
     }
 
     /**
@@ -34,7 +33,7 @@ class RetrieveTalentsRequest extends GetRequest
      */
     public function expects(): string
     {
-        return 'talents';
+        return 'users';
     }
 
     /**

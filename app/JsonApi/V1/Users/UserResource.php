@@ -56,16 +56,16 @@ class UserResource extends JsonApiResource
         return [];
     }
 
-    /**
-     * Get the resource's relationships.
-     *
-     * @param Request|null $request
-     * @return iterable
-     */
-    public function relationships($request): iterable
-    {
-        return [
-            $this->relation('talent'),
-        ];
-    }
+    // /**
+    //  * Get the resource's relationships.
+    //  *
+    //  * @param Request|null $request
+    //  * @return iterable
+    //  */
+    // public function relationships($request): iterable
+    // {
+    //     return [
+    //         $this->relation('talent'),
+    //     ];
+    // }
 }

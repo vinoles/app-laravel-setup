@@ -75,4 +75,17 @@ class UserFactory extends Factory
         ]);
     }
 
+    /**
+     * Indicates that the user has a password.
+     *
+     * @param  string  $password
+     * @return static
+     */
+    public function withFirstName(string $firstName): static
+    {
+        return $this->state([
+            'first_name' => $firstName,
+        ]);
+    }
+
 }

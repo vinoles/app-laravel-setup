@@ -33,7 +33,6 @@ class Server extends BaseServer
     protected function allSchemas(): array
     {
         return [
-            TalentSchema::class,
             UserSchema::class,
         ];
     }
