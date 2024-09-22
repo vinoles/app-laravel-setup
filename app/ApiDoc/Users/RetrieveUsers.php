@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ApiDoc\Talents;
+namespace App\ApiDoc\Users;
 
 use App\ApiDoc\ApiDoc;
 use OpenApi\Annotations as OA;
@@ -8,11 +8,11 @@ use OpenApi\Annotations as OA;
 /**
  *
  * @OA\Get(
- *     path="/api/v1/talents",
- *     operationId="retrieveTalents",
- *     tags={"Talents"},
- *     summary="List talents",
- *     description="List talents endpoint",
+ *     path="/api/v1/users",
+ *     operationId="retrieveUsers",
+ *     tags={"Users"},
+ *     summary="List users",
+ *     description="List users endpoint",
  *     security={ {"sanctum": {} }},
  *     @OA\Parameter(
  *         name="accept",
@@ -45,17 +45,16 @@ use OpenApi\Annotations as OA;
  *         description="Number of elements for page"
  *     ),
  *     @OA\Parameter(
- *         name="filter[hand_preference]",
+ *         name="filter[first_name]",
  *         in="query",
  *         @OA\Schema(
  *         type="string",
- *         enum={"left", "right", "ambidextrous"},
  *         ),
  *         description="Filter for firstName attribute"
  *     ),
  *     @OA\Response(
  *       response="200",
- *       description="Retrieve Talents Successfully",
+ *       description="Retrieve Users Successfully",
  *         @OA\JsonContent(
  *             type="object",
  *             @OA\MediaType(
@@ -96,6 +95,6 @@ use OpenApi\Annotations as OA;
  * )
  *
  */
-class RetrieveTalents extends ApiDoc
+class RetrieveUsers extends ApiDoc
 {
 }
