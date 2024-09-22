@@ -21,7 +21,7 @@ class ConfirmPasswordTest extends TestCase
 
         $request = ConfirmPasswordRequest::make($user, 'password');
 
-        $response = $this->signIn($user)->sendRequestApiPost($request);
+        $response = $this->signIn($user)->sendRequestApiPostWithPayload($request);
 
         $response->assertSuccessful();
 
@@ -43,7 +43,7 @@ class ConfirmPasswordTest extends TestCase
 
         $request = ConfirmPasswordRequest::make($user, 'error_password');
 
-        $response = $this->signIn($user)->sendRequestApiPost($request);
+        $response = $this->signIn($user)->sendRequestApiPostWithPayload($request);
 
         $response->assertSuccessful();
 
@@ -67,7 +67,7 @@ class ConfirmPasswordTest extends TestCase
 
         $request = ConfirmPasswordRequest::make($otherUser, 'error_password');
 
-        $response = $this->signIn($user)->sendRequestApiPost($request);
+        $response = $this->signIn($user)->sendRequestApiPostWithPayload($request);
 
         $response->assertForbidden();
 

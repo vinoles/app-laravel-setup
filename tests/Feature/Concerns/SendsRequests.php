@@ -96,7 +96,24 @@ trait SendsRequests
      * @param  mixed  $args
      * @return TestResponse
      */
-    protected function sendRequestApiPost(...$args): TestResponse
+    protected function sendRequestApiPostWithPayload(...$args): TestResponse
+    {
+        $request = Arr::get($args, 0);
+
+        return $this
+            ->jsonApi()
+            ->asFormUrlEncoded()
+            ->withPayload($request->payload())
+            ->post($request->endpoint());
+    }
+
+    /**
+     * Send a post request to the server json api.
+     *
+     * @param  mixed  $args
+     * @return TestResponse
+     */
+    protected function sendRequestApiPostWithData(...$args): TestResponse
     {
         $request = Arr::get($args, 0);
 

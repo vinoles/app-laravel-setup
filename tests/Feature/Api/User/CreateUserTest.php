@@ -30,7 +30,7 @@ class CreateUserTest extends TestCase
         $request = CreateUserRequest::make();
 
         $this->signIn(null)
-            ->sendRequestApiPost($request)
+            ->sendRequestApiPostWithData($request)
             ->assertUnauthorized();
     }
 
@@ -50,7 +50,7 @@ class CreateUserTest extends TestCase
             ->assignRole(UserRole::ADMIN);
 
         $response = $this->signIn($authUser)
-            ->sendRequestApiPost($request);
+            ->sendRequestApiPostWithData($request);
 
         $response->assertSuccessful();
 
@@ -90,7 +90,7 @@ class CreateUserTest extends TestCase
                 ->assignRole(UserRole::ADMIN);
 
         $response = $this->signIn($authUser)
-            ->sendRequestApiPost($request);
+            ->sendRequestApiPostWithData($request);
 
         $response->assertUnprocessable();
 
