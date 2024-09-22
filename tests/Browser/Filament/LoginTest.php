@@ -23,8 +23,9 @@ class LoginTest extends DuskTestCase
      */
     public function login_page(): void
     {
-        $this->browse(function (Browser $browser) {
-            $page = new Login();
+        $page = new Login();
+
+        $this->browse(function (Browser $browser) use ($page) {
 
             $browser->visit($page)
                 ->waitForText(__('APP'))
@@ -41,23 +42,20 @@ class LoginTest extends DuskTestCase
      */
     public function login_page_and_redirect_to_dashboard(): void
     {
-        $this->browse(function (Browser $browser) {
-            $user = User::factory()->create();
+        $user = User::factory()->create();
 
-            $user->assignRole(UserRole::ADMIN);
+        $user->assignRole(UserRole::ADMIN);
 
-            $page = new Login();
+        $page = new Login();
+
+        $this->browse(function (Browser $browser) use ($page, $user) {
 
             $browser->visit($page)
                 ->waitForText(__('APP'))
                 ->assertPresent('@email')
                 ->assertPresent('@password')
                 ->assertPresent('@submit')
-                ->submitSignInForm($user, 'password')
-                ->waitForLink(__('admin.users.users'))
-                ->assertSee(__('admin.users.users'))
-                ->pause(5000)
-                ->screenshot('dashboard_page');
+                ->loginAs($user);
         });
     }
 }

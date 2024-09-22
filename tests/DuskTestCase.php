@@ -29,7 +29,7 @@ abstract class DuskTestCase extends BaseTestCase
      */
     protected function driver(): RemoteWebDriver
     {
-        $options = (new ChromeOptions)->addArguments(collect([
+        $options = (new ChromeOptions())->addArguments(collect([
             $this->shouldStartMaximized() ? '--start-maximized' : '--window-size=1920,1080',
         ])->unless($this->hasHeadlessDisabled(), function (Collection $items) {
             return $items->merge([
@@ -43,7 +43,11 @@ abstract class DuskTestCase extends BaseTestCase
             config('selenium.host')
             : 'localhost';
 
-        $port = config('selenium.port');
+        $port = $this->runningInSail() ?
+            config('selenium.port')
+            : '9515';
+
+        // dump($port);
         return RemoteWebDriver::create(
             "http://{$selenium}:{$port}/wd/hub",
             DesiredCapabilities::chrome()

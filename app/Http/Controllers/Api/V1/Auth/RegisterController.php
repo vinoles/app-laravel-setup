@@ -8,6 +8,7 @@ use App\Http\Requests\RegisterRequest;
 use App\Jobs\CreateTalentAfterRegister;
 use App\Models\User;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
 use LaravelJsonApi\Core\Responses\DataResponse;
 
@@ -24,10 +25,14 @@ class RegisterController extends Controller
         $attributes = $request->validated();
 
         $role = Arr::pull($attributes, 'role');
+        $birthdate = Arr::pull($attributes, 'birthdate');
 
         $user = User::create(
             array_merge(
-                ['uuid' => Str::uuid()],
+                [
+                    'uuid' => Str::uuid(),
+                    'birthdate' => Carbon::parse($birthdate)->format('Y-m-d')
+                ],
                 $attributes
             )
         )->assignRole($role);

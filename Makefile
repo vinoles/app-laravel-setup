@@ -42,7 +42,7 @@ db_fresh:
 
 # Refresh test database and migrations
 db_fresh_test:
-	$(sail) artisan migrate:fresh --force --database=pgsql_test
+	$(sail) artisan migrate:fresh --force --database=mysql_test
 
 # Rollback migrations
 rollback:

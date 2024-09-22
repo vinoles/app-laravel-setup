@@ -12,7 +12,7 @@ class Login extends Page
      */
     public function url(): string
     {
-        return route('filament.admin.auth.login');
+        return $this->getRoute('filament.admin.auth.login');
 
     }
 

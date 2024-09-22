@@ -7,18 +7,19 @@ use Laravel\Dusk\Page as BasePage;
 
 abstract class Page extends BasePage
 {
-    function getRoute($name, $parameters = [])
+    public function getRoute($name, $parameters = [])
     {
         $route = route(
             $name,
             $parameters,
         );
 
-        return Str::replace(
-            'http://app-laravel-setup.test',
-            'https://nginx',
-            $route,
-        );
+        return $route;
+        //  Str::replace(
+        //     'http://app-laravel-setup.test',
+        //     'https://nginx',
+        //     $route,
+        // );
     }
 
     /**

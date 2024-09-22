@@ -61,7 +61,7 @@ class User extends Authenticatable implements FilamentUser, HasName
      * @var array<string, string>
      */
     protected $casts = [
-        'birthdate' => 'date:d-m-Y',
+        'birthdate' => 'date:Y-m-d',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
