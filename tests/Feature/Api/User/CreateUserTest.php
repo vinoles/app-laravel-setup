@@ -4,21 +4,11 @@ namespace Tests\Feature\Auth;
 
 use App\Constants\UserRole;
 use App\Models\User;
-use Illuminate\Support\Facades\Queue;
 use Tests\Feature\Requests\Api\CreateUserRequest;
 use Tests\Feature\TestCase;
 
 class CreateUserTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        Queue::fake();
-
-        $this->artisan('db:seed', ['--class' => 'ShieldSeeder']);
-    }
-
     /**
     * A user not logged in cannot create the user
     *

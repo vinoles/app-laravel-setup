@@ -10,17 +10,6 @@ use Tests\Feature\TestCase;
 class RetrieveUsersTest extends TestCase
 {
     /**
-     * Sets up the testing environment by calling the parent setUp method and seeding the database with initial data using ShieldSeeder.
-     *
-     * This ensures that every test starts with a consistent set of data, particularly focusing on the permissions and roles setup required by the application.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->artisan('db:seed', ['--class' => 'ShieldSeeder']);
-    }
-
-    /**
      * A user not logged in cannot retrieve the users
      *
      * @test

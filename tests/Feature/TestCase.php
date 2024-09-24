@@ -12,6 +12,12 @@ class TestCase extends BaseTestCase
 {
     use CreatesUsers, SendsRequests;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->artisan('db:seed', ['--class' => 'ShieldSeeder']);
+    }
+
     /**
      * The authenticated user.
      *

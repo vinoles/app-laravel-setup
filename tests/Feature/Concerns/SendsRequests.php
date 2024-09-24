@@ -125,4 +125,24 @@ trait SendsRequests
             ->withData($data)
             ->post($request->endpoint());
     }
+
+    /**
+     * Send a patch request to the server json api.
+     *
+     * @param  mixed  $args
+     * @return TestResponse
+     */
+    protected function sendRequestApiPatchWithData(...$args): TestResponse
+    {
+
+        $request = Arr::get($args, 0);
+        $data['type'] = $request->type();
+        $data['id'] = $request->modelUuid();
+        $data['attributes'] = $request->payload();
+
+        return $this
+            ->jsonApi()
+            ->withData($data)
+            ->patch($request->endpoint());
+    }
 }

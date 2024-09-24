@@ -10,13 +10,6 @@ use Tests\Feature\TestCase;
 
 class RetrieveUserTest extends TestCase
 {
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->artisan('db:seed', ['--class' => 'ShieldSeeder']);
-
-    }
-
     /**
      * A user not logged in cannot retrieve the user
      *
